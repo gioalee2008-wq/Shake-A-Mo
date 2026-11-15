@@ -169,6 +169,31 @@ th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: 
 .d-done { background: var(--done); } .d-doing { background: var(--doing); } .d-todo { background: var(--todo); } .d-blocked { background: var(--blocked); }
 .rules { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
 @media (prefers-reduced-motion: no-preference) { .bar > i { transition: width 0.4s ease; } }
+
+/* Launcher */
+.launch-btn { border: 1px solid var(--accent); color: var(--accent); background: transparent; padding: 3px 10px; border-radius: 999px;
+  font-size: 12px; font-weight: 700; cursor: pointer; justify-self: start; }
+.launch-btn:hover { background: var(--accent); color: var(--accent-ink); }
+.launcher { grid-column: 1 / -1; display: grid; gap: 14px; background: var(--surface-2); border-radius: var(--radius); padding: 14px; margin-top: 6px; min-width: 0; }
+.launcher h4 { font-family: var(--font-display); font-weight: 400; font-size: 17px; margin: 0; }
+.mode-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.q { display: grid; gap: 6px; }
+.q-title { font-weight: 700; }
+.opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 6px; }
+.opt { display: grid; grid-template-columns: auto 1fr; gap: 2px 8px; align-items: start; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 8px; padding: 8px 10px; cursor: pointer; }
+.opt:has(input:checked) { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.opt input { margin-top: 4px; }
+.opt .lbl { font-weight: 600; }
+.opt .why { grid-column: 2; font-size: 12.5px; color: var(--muted); }
+.rec { font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-left: 4px; }
+.launcher textarea { width: 100%; border: 1px solid var(--line); border-radius: 8px; padding: 8px; background: var(--surface); resize: vertical; }
+.launcher textarea.prompt { min-height: 220px; font-family: var(--font-mono); font-size: 12.5px; line-height: 1.45; }
+.thinking { font-size: 14px; color: var(--muted); }
+.launch-log { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; font-size: 13px; }
+.launch-log a { color: var(--accent); font-weight: 600; }
+.result-ok { color: var(--done); font-weight: 600; }
+.result-bad { color: var(--blocked); font-weight: 600; }
 </style>
 
 <header class="band">
@@ -276,10 +301,40 @@ th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: 
     "Never sell the escape, never lock zones behind Robux, show odds on any paid random item.",
   ];
 
+  // ---------- Launcher reference ----------
+  const REPO_URL = "https://github.com/gioalee2008-wq/Shake-A-Mo";
+  const CCR = "Claude Code Remote";
+  const MODELS = [
+    { id: "claude-opus-5-5", name: "Opus 5.5", why: "Strongest. Art, rigging, multi-step systems, hard bugs." },
+    { id: "claude-sonnet-5-5", name: "Sonnet 5.5", why: "Fast and capable. Scripts, UI, tuning numbers." },
+    { id: "claude-haiku-5-5", name: "Haiku 5.5", why: "Quickest. Small edits, docs, checklists." },
+    { id: "claude-fable-5-2", name: "Fable 5.2", why: "Another Claude 5 model, if you want to try it." },
+  ];
+  const EFFORTS = [["", "Default"], ["low", "Low"], ["medium", "Medium"], ["high", "High"], ["max", "Max"]];
+  const TARGETS = [
+    { id: "cloud", name: "New cloud session", why: "Starts a Claude Code session on claude.ai with the GitHub repo. It can't open your PC's Studio project unless you share that folder." },
+    { id: "copy", name: "Copy prompt for my PC", why: "Copies the prompt so you can paste it into Claude Code on your PC, where Studio is connected." },
+  ];
+  const GAME_CONTEXT = "SHAKE A Monster Tree! is a Roblox game in development (Luau, Roblox Studio, Claude Code with the Studio MCP, Blender 4.5.2, ForgeGUI for art). " +
+    "Loop: walk to a guardian tree in a zone, press E and mash E for 3 s to fill a shake meter (24 presses = full). The tree wakes and drops a monster " +
+    "(rarity odds by tree class; a full meter boosts Uncommon x3 and Rare x5). The player grabs it and runs while the tree's claw branch chases them " +
+    "(homes in within 14 studs, catches at 4 studs, WalkSpeed 16). Depositing at your base adds coins per second (Leafling 5 up to Wispfox 220). " +
+    "Base storage starts at 10 slots, upgrades to 20. Six zones: Forest Grove, Candy Canopy, Sandy Orchard, Icy Thicket, Volcanic Woods, Cosmic Orchard. " +
+    "Locked tree style: Block Guardian (cubes with the ground's stud material, sleeping face that turns angry, claw hidden in the leaves). " +
+    "Players are scaled x1.5. Only the 8 Forest monsters exist so far. The game is not released yet.";
+  const WORK_RULES = "Never start Studio Play without asking me. Back up before changing approved assets. No unrelated features. " +
+    "Report results as PASS / FAIL / NOT TESTED. Keep replies short and simple.";
+  const STRONG_AREAS = ["Trees & art", "Zones & content", "VFX & audio", "Core loop", "Data & saving", "Monetization"];
+
   // ---------- State ----------
   const tasks = new Map();          // id -> data
   const expanded = new Set();
   let db = null, col = null;
+  let sample = null, mcp = null, canCloud = false;
+  const launcherOpen = new Set();
+  const drafts = new Map();          // id -> {mode, answers, extra, model, effort, target, prompt, promptTouched}
+  const planning = new Map();        // id -> {ctl, error}
+  const launching = new Map();       // id -> {busy, result}
   let canWrite = true;
   let loaded = false;
   let view = "overview";
@@ -392,11 +447,18 @@ th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: 
 
   function taskRow(t, opts = {}) {
     const open = expanded.has(t.id);
-    const toggle = () => { open ? expanded.delete(t.id) : expanded.add(t.id); render(); };
+    const toggle = () => { if (open) { expanded.delete(t.id); launcherOpen.delete(t.id); } else expanded.add(t.id); render(); };
+    const openLauncher = () => {
+      if (launcherOpen.has(t.id)) launcherOpen.delete(t.id); else { launcherOpen.add(t.id); expanded.add(t.id); }
+      render();
+    };
+    const chipRow = chips(t, opts);
+    if (t.status !== "done") chipRow.append(el("button", { class: "launch-btn", "aria-expanded": String(launcherOpen.has(t.id)), onclick: openLauncher },
+      launcherOpen.has(t.id) ? "Hide launcher" : "Do it with Claude"));
     const row = el("div", { class: `task${t.status === "done" ? " is-done" : ""}` },
       statusButton(t),
       el("button", { class: "title-btn title", "aria-expanded": String(open), onclick: toggle }, t.title),
-      chips(t, opts));
+      chipRow);
     if (open) {
       const notesId = `notes-${t.id}`;
       const notes = el("textarea", { id: notesId, placeholder: "Your notes (saved when you click away)", disabled: !canWrite });
@@ -422,9 +484,263 @@ th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: 
         (t.signals || []).length ? el("p", { class: "small muted" },
           "Discovery signals: " + t.signals.map((n) => `${n} ${SIGNALS[n - 1]?.short}`).join(" · ")) : null,
         notes,
+        launchLog(t),
         el("div", { class: "row-actions" }, statusSel, phaseSel, prioSel, del)));
+      if (launcherOpen.has(t.id)) row.append(launcherPanel(t));
     }
     return row;
+  }
+
+  // Launcher ---------------------------------------------------------------
+  const modelName = (id) => MODELS.find((m) => m.id === id)?.name || id;
+  const safeKey = (s, i) => (String(s || "").replace(/[^A-Za-z0-9_]/g, "_").slice(0, 40) || `q${i + 1}`);
+  function defaultModel(t) {
+    if (t.plan?.suggestedModel) return t.plan.suggestedModel;
+    return STRONG_AREAS.includes(t.area) || t.priority === "P1" ? "claude-opus-5-5" : "claude-sonnet-5-5";
+  }
+  function draftFor(t) {
+    let d = drafts.get(t.id);
+    if (!d) {
+      const saved = t.launchPrefs || {};
+      d = { mode: "", answers: { ...(saved.answers || {}) }, extra: saved.extra || "", model: saved.model || defaultModel(t),
+        effort: saved.effort || "", target: saved.target || (canCloud ? "cloud" : "copy"), prompt: "", promptTouched: false };
+      for (const q of t.plan?.questions || []) if (d.answers[q.id] == null) d.answers[q.id] = q.recommended;
+      drafts.set(t.id, d);
+    }
+    if (d.target === "cloud" && !canCloud) d.target = "copy";
+    return d;
+  }
+
+  function buildPrompt(t, d) {
+    const lines = [
+      `I'm working on my Roblox game "SHAKE A Monster Tree!". Please do this task from my Dev Hub.`, "",
+      `TASK: ${t.title}`, `System: ${t.area} · Phase: ${t.phase} · Priority: ${t.priority}`,
+    ];
+    if (t.detail) lines.push(`Details: ${t.detail}`);
+    const sig = (t.signals || []).map((n) => SIGNALS[n - 1]).filter(Boolean);
+    if (sig.length) lines.push(`Roblox discovery signals this should improve: ${sig.map((g) => `${g.n} ${g.name}`).join("; ")}.`);
+    const qs = d.mode === "plan" ? t.plan?.questions || [] : [];
+    const picks = qs.map((q) => { const o = q.options[d.answers[q.id]]; return o ? `- ${q.question} → ${o.label}${o.detail ? ` (${o.detail})` : ""}` : null; }).filter(Boolean);
+    if (picks.length) lines.push("", "MY DECISIONS:", ...picks);
+    if (d.extra && d.extra.trim()) lines.push("", "EXTRA INSTRUCTIONS FROM ME:", d.extra.trim());
+    if (t.notes && t.notes.trim()) lines.push("", "MY NOTES ON THIS TASK:", t.notes.trim());
+    lines.push("", "GAME CONTEXT:", GAME_CONTEXT, "", "HOW I WORK:", WORK_RULES, "",
+      "WHERE THE PROJECT IS: the Roblox place and its scripts are on my Windows PC (folder \"Shake a Monster Tree!\", opened in Roblox Studio with the Studio MCP). " +
+      `If you can't reach them from where you're running, tell me, and put any code or docs in the GitHub repo ${REPO_URL} instead.`,
+      "", "WHEN YOU'RE DONE: tell me what changed, what you tested (PASS / FAIL / NOT TESTED), and what I should Play-test.");
+    return lines.join("\n");
+  }
+
+  function savePlan(id, plan) {
+    const cur = tasks.get(id); if (!cur) return;
+    if (canWrite && col) updateTask(id, { plan }); else { tasks.set(id, { ...cur, plan }); scheduleRender(); }
+  }
+
+  async function planTask(t) {
+    if (!sample || planning.get(t.id)?.ctl) return;
+    const ctl = new AbortController();
+    planning.set(t.id, { ctl, error: "" });
+    scheduleRender();
+    const prompt = [
+      "You help plan tasks for a Roblox game. Game context:", GAME_CONTEXT, "",
+      `Task: ${t.title}`, `System: ${t.area}. Phase: ${t.phase}. Priority: ${t.priority}.`,
+      t.detail ? `Details: ${t.detail}` : "", t.notes ? `Owner's notes: ${t.notes}` : "", "",
+      "Before this task goes to a coding agent, the game's owner wants to make the key decisions. List the 3 to 5 decisions that most change the result " +
+      "(design choices, numbers, scope, look and feel). For each, give 2 to 4 concrete options and mark the one you recommend. Use short, plain words for a young developer.",
+      "Also suggest which Claude model fits: \"claude-opus-5-5\" for art, rigging, multi-step systems or hard bugs; \"claude-sonnet-5-5\" for scripts, UI and tuning; \"claude-haiku-5-5\" for small edits and docs.",
+      "",
+      'Reply with only JSON in this shape: {"summary": "one sentence on how you would approach it", "questions": [{"id": "q1", "question": "...", ' +
+      '"options": [{"label": "short option", "detail": "one short line on the effect"}], "recommended": 0}], "suggestedModel": "claude-opus-5-5", "modelReason": "one short line"}',
+    ].filter((x) => x !== "").join("\n");
+    try {
+      const res = await sample.json(prompt, { signal: ctl.signal, cache: false });
+      const questions = (Array.isArray(res?.questions) ? res.questions : []).slice(0, 6).map((q, i) => {
+        const options = (Array.isArray(q?.options) ? q.options : []).slice(0, 5)
+          .map((o) => ({ label: String(o?.label ?? o ?? "").slice(0, 160), detail: String(o?.detail ?? "").slice(0, 240) })).filter((o) => o.label);
+        const r = Number(q?.recommended);
+        return { id: safeKey(q?.id, i), question: String(q?.question ?? "").slice(0, 300), options,
+          recommended: Number.isInteger(r) && r >= 0 && r < options.length ? r : 0 };
+      }).filter((q) => q.question && q.options.length);
+      if (!questions.length) throw { code: "invalid_json" };
+      const plan = { summary: String(res.summary ?? "").slice(0, 400), questions,
+        suggestedModel: MODELS.some((m) => m.id === res.suggestedModel) ? res.suggestedModel : defaultModel(t),
+        modelReason: String(res.modelReason ?? "").slice(0, 240), at: new Date().toISOString() };
+      planning.delete(t.id);
+      const d = draftFor(t);
+      d.mode = "plan"; d.answers = {}; d.promptTouched = false; d.model = plan.suggestedModel;
+      for (const q of questions) d.answers[q.id] = q.recommended;
+      savePlan(t.id, plan);
+    } catch (e) {
+      const copy = {
+        cancelled: "",
+        not_granted: "This page isn't allowed to use Claude for you. You can still launch without planning.",
+        sampling_disabled: "Claude isn't available on this account here. You can still launch without planning.",
+        rate_limited: "Too many requests right now. Try again in a minute.",
+        session_expired: "Sign in to claude.ai again, then try.",
+        invalid_json: "Claude's answer didn't come back in a usable shape. Try again.",
+        refused: "Claude declined to plan this one. Edit the task text and try again.",
+      };
+      planning.set(t.id, { ctl: null, error: copy[e?.code] ?? "Planning didn't finish. Try again." });
+      scheduleRender();
+    }
+  }
+
+  function launchError(e) {
+    switch (e?.code) {
+      case "server_not_connected": return "The Claude Code Remote connector isn't connected. Add it in claude.ai Settings → Connectors, or choose Copy prompt.";
+      case "needs_reauth": return "Reconnect Claude Code Remote in claude.ai Settings → Connectors, then try again.";
+      case "not_in_manifest": case "approval_required": case "consent_required":
+        return "Starting sessions needs your OK. Click Launch again and allow it when claude.ai asks, or choose Copy prompt.";
+      case "blocked_by_policy": return "Your organization doesn't allow starting sessions from pages. Choose Copy prompt instead.";
+      case "selection_required": return "Pick which Claude Code Remote connector to use when claude.ai asks, then try again.";
+      case "tool_error": return `Claude Code couldn't start the session: ${String(e.message || "").slice(0, 200)}`;
+      case "server_unavailable": case "upstream_error":
+        return "No answer from Claude Code. The session may still have started: check claude.ai/code before launching again.";
+      default: return "The launch didn't go through. Try again, or choose Copy prompt.";
+    }
+  }
+
+  function recordLaunch(id, entry, d) {
+    const latest = tasks.get(id); if (!latest) return;
+    const patch = { launches: [...(latest.launches || []), entry].slice(-10) };
+    if (latest.status === "todo") patch.status = "doing";
+    if (d) patch.launchPrefs = { answers: { ...d.answers }, extra: d.extra, model: d.model, effort: d.effort, target: d.target };
+    if (canWrite && col) updateTask(id, patch); else { tasks.set(id, { ...latest, ...patch }); scheduleRender(); }
+  }
+
+  // Called straight from a click, so the clipboard write happens inside the gesture.
+  function launchTask(id, quick) {
+    const t = { id, ...(tasks.get(id) || {}) };
+    if (!t.title || launching.get(id)?.busy) return;
+    const d = draftFor(t);
+    const model = quick ? defaultModel(t) : d.model;
+    const effort = quick ? "" : d.effort;
+    const target = quick ? (canCloud ? "cloud" : "copy") : d.target;
+    const prompt = quick ? buildPrompt(t, { mode: "quick", answers: {}, extra: "" }) : (d.promptTouched ? d.prompt : buildPrompt(t, d));
+    const st = { busy: true, result: null };
+    launching.set(id, st);
+    const entry = { at: new Date().toISOString(), model, target, mode: quick ? "quick" : "planned" };
+    const finish = (result, record) => { st.busy = false; st.result = result; if (record) recordLaunch(id, entry, quick ? null : d); scheduleRender(); };
+
+    if (target === "copy") {
+      let p;
+      try { p = navigator.clipboard.writeText(prompt); } catch { p = Promise.reject(new Error("no clipboard")); }
+      p.then(() => finish({ ok: true, text: "Prompt copied. Paste it into Claude Code on your PC." }, true),
+        () => finish({ ok: false, text: "Couldn't copy automatically. Select the prompt below and copy it.", prompt }, false));
+      scheduleRender();
+      return;
+    }
+    const input = { prompt, title: `Dev Hub: ${t.title}`.slice(0, 120), model, source_url: REPO_URL, tags: ["devhub"] };
+    if (effort) input.effort = effort;
+    scheduleRender();
+    mcp.callTool(CCR, "create_session", input).then((res) => {
+      const raw = JSON.stringify(res?.payload ?? res?.content ?? "");
+      const sid = (raw.match(/session_[A-Za-z0-9]+/) || [])[0] || "";
+      if (sid) entry.sessionId = sid;
+      finish({ ok: true, text: `Session started with ${modelName(model)}.`, url: sid ? `https://claude.ai/code/${sid}` : "https://claude.ai/code" }, true);
+    }, (e) => finish({ ok: false, text: launchError(e), prompt }, false));
+  }
+
+  function radioCards(name, items, selected, onPick, extra = {}) {
+    return el("div", { class: "opts" }, items.map((it, i) => {
+      const id = `${name}-${i}`;
+      const input = el("input", { type: "radio", name, id, checked: selected === it.id, disabled: !!it.disabled, onchange: () => onPick(it.id) });
+      return el("label", { class: "opt", for: id, style: it.disabled ? "opacity:0.55;cursor:not-allowed" : null }, input,
+        el("span", { class: "lbl" }, it.name, extra.mark === it.id ? el("span", { class: "rec" }, extra.markText || "Suggested") : null),
+        it.why ? el("span", { class: "why" }, it.why) : null);
+    }));
+  }
+
+  function planForm(t, d) {
+    const plan = t.plan;
+    const promptId = `prompt-${t.id}`;
+    const refreshPrompt = () => {
+      if (d.promptTouched) return;
+      d.prompt = buildPrompt(t, d);
+      const ta = document.getElementById(promptId); if (ta) ta.value = d.prompt;
+    };
+    const wrap = el("div", { class: "view", style: "gap:14px" });
+    if (plan.summary) wrap.append(el("p", { class: "small", style: "margin:0" }, el("strong", {}, "Claude's approach: "), plan.summary));
+    wrap.append(...plan.questions.map((q) => el("fieldset", { class: "q", style: "border:0;padding:0;margin:0" },
+      el("legend", { class: "q-title", style: "padding:0;margin-bottom:6px" }, q.question),
+      radioCards(`q-${t.id}-${q.id}`, q.options.map((o, i) => ({ id: i, name: o.label, why: o.detail })), d.answers[q.id],
+        (v) => { d.answers[q.id] = v; refreshPrompt(); }, { mark: q.recommended, markText: "Recommended" }))));
+
+    wrap.append(el("fieldset", { class: "q", style: "border:0;padding:0;margin:0" },
+      el("legend", { class: "q-title", style: "padding:0;margin-bottom:6px" }, "Which Claude model?"),
+      plan.modelReason ? el("p", { class: "small muted", style: "margin:0 0 4px" }, `Suggested: ${modelName(plan.suggestedModel)}. ${plan.modelReason}`) : null,
+      radioCards(`m-${t.id}`, MODELS, d.model, (v) => { d.model = v; }, { mark: plan.suggestedModel })));
+
+    const effortSel = el("select", { class: "field", id: `effort-${t.id}`, "aria-label": "Effort", onchange: (e) => { d.effort = e.target.value; } },
+      EFFORTS.map(([v, txt]) => el("option", { value: v, selected: d.effort === v }, txt)));
+    wrap.append(el("label", { class: "check", for: `effort-${t.id}` }, "Thinking effort:", effortSel));
+
+    wrap.append(el("fieldset", { class: "q", style: "border:0;padding:0;margin:0" },
+      el("legend", { class: "q-title", style: "padding:0;margin-bottom:6px" }, "Where should it run?"),
+      radioCards(`t-${t.id}`, TARGETS.map((x) => ({ ...x, disabled: x.id === "cloud" && !canCloud,
+        why: x.id === "cloud" && !canCloud ? "Not available in this view (needs the Claude Code Remote connector on claude.ai)." : x.why })),
+        d.target, (v) => { d.target = v; scheduleRender(); })));
+
+    const extra = el("textarea", { id: `extra-${t.id}`, placeholder: "Anything else Claude should know or do? e.g. \"keep the leaves mint green\", \"don't touch the Forest trees\"" });
+    extra.value = d.extra;
+    extra.addEventListener("input", () => { d.extra = extra.value; refreshPrompt(); });
+    wrap.append(el("label", { class: "q", for: `extra-${t.id}` }, el("span", { class: "q-title" }, "Your extra instructions"), extra));
+
+    const promptTa = el("textarea", { id: promptId, class: "prompt", "aria-label": "Prompt that will be sent" });
+    promptTa.value = d.promptTouched ? d.prompt : buildPrompt(t, d);
+    promptTa.addEventListener("input", () => { d.prompt = promptTa.value; d.promptTouched = true; });
+    const preview = el("details", {}, el("summary", { class: "small", style: "cursor:pointer;font-weight:600" }, "Preview or edit the full prompt"),
+      el("div", { class: "view", style: "gap:8px;margin-top:8px" }, promptTa,
+        el("button", { class: "btn", type: "button", onclick: () => { d.promptTouched = false; d.prompt = buildPrompt(t, d); promptTa.value = d.prompt; } }, "Reset to generated prompt")));
+    wrap.append(preview);
+
+    const busy = !!launching.get(t.id)?.busy;
+    wrap.append(el("div", { class: "row-actions" },
+      el("button", { class: "btn primary", disabled: busy, onclick: () => launchTask(t.id, false) },
+        busy ? "Launching…" : d.target === "cloud" ? `Launch with ${modelName(d.model)}` : "Copy prompt"),
+      el("button", { class: "btn", disabled: !sample, onclick: () => planTask(t) }, "Ask Claude for new options")));
+    return wrap;
+  }
+
+  function launcherPanel(t) {
+    const d = draftFor(t);
+    const p = planning.get(t.id);
+    const L = launching.get(t.id);
+    const panel = el("div", { class: "launcher" }, el("h4", {}, "Do this task with Claude"));
+    const planBtn = el("button", { class: "btn", disabled: (!sample && !t.plan) || !!p?.ctl,
+      onclick: () => { d.mode = "plan"; if (t.plan) scheduleRender(); else planTask(t); } },
+      t.plan ? "Plan it with me" : "Plan it with me (Claude suggests options)");
+    const quickBtn = el("button", { class: "btn primary", disabled: !!L?.busy, onclick: () => launchTask(t.id, true) },
+      canCloud ? "Launch now, skip planning" : "Copy prompt now, skip planning");
+    panel.append(el("div", { class: "mode-row" }, planBtn, quickBtn),
+      el("p", { class: "small muted", style: "margin:0" },
+        `"Launch now" sends just the task and your notes, using ${modelName(defaultModel(t))}, ${canCloud ? "in a new cloud session" : "by copying the prompt"}.`));
+    if (!sample && !t.plan) panel.append(el("p", { class: "small muted", style: "margin:0" }, "Planning needs Claude in this view; open the page on claude.ai. You can still launch."));
+    if (p?.ctl) panel.append(el("div", { class: "row-actions" },
+      el("span", { class: "thinking", role: "status" }, "Claude is working out the key decisions. This can take up to a minute."),
+      el("button", { class: "btn", onclick: () => p.ctl.abort() }, "Stop")));
+    if (p?.error) panel.append(el("p", { class: "result-bad small", style: "margin:0" }, p.error));
+    if (d.mode === "plan" && t.plan && !p?.ctl) panel.append(planForm(t, d));
+    if (L?.result) {
+      const r = L.result;
+      panel.append(el("div", { class: "view", style: "gap:8px", role: "status" },
+        el("p", { class: `${r.ok ? "result-ok" : "result-bad"} small`, style: "margin:0" }, r.text, " ",
+          r.url ? el("a", { href: r.url, target: "_blank", rel: "noopener" }, "Open it in Claude Code") : null),
+        r.prompt ? (() => { const ta = el("textarea", { class: "prompt", readonly: true, "aria-label": "Prompt to copy" }); ta.value = r.prompt;
+          ta.addEventListener("focus", () => ta.select()); return ta; })() : null));
+    }
+    return panel;
+  }
+
+  function launchLog(t) {
+    const list = (t.launches || []).slice().reverse();
+    if (!list.length) return null;
+    return el("div", {}, el("div", { class: "eyebrow" }, "Launched"),
+      el("ul", { class: "launch-log" }, list.map((x) => {
+        const when = (() => { try { return new Date(x.at).toLocaleString(undefined, { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }); } catch { return x.at; } })();
+        return el("li", {}, `${when} · ${modelName(x.model)} · ${x.mode === "quick" ? "quick launch" : "planned"} · `,
+          x.target === "cloud" ? (x.sessionId ? el("a", { href: `https://claude.ai/code/${x.sessionId}`, target: "_blank", rel: "noopener" }, "cloud session") : "cloud session") : "prompt copied");
+      })));
   }
 
   // Overview -------------------------------------------------------------
@@ -627,6 +943,20 @@ th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: 
 
   // ---------- Boot ----------
   readHash();
+  // Launcher capabilities load alongside the tasks; until they answer, launches fall back to copying the prompt.
+  (async () => {
+    try {
+      const claude = window.claude;
+      if (!claude) return;
+      const [s, m] = await Promise.all([claude.use("sample"), claude.use("mcp")]);
+      sample = s; mcp = m;
+      if (mcp) {
+        const lt = await mcp.listTools(CCR).catch(() => null);
+        canCloud = !!lt?.servers?.some((x) => x.server === CCR && x.tools.some((tool) => tool.name === "create_session"));
+      }
+    } catch { /* launcher falls back to copying the prompt */ }
+    scheduleRender();
+  })();
   const timer = setTimeout(() => { if (!loaded) setSync("Saved tasks can't be reached yet."); }, 10000);
   (async () => {
     try {
