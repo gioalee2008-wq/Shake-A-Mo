@@ -1609,5 +1609,107 @@
   "idea": false,
   "order": 107,
   "notes": ""
+ },
+ "stor-15-30-s-gameplay-video-for-home-previews": {
+  "title": "15–30 s gameplay video for Home previews",
+  "area": "Store page",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Home auto-plays a game's video when players hover (desktop) or pause on it (mobile). Show shake → monster pops out → claw chase → deposit → coins. Ranking effect unclear; it helps clicks.",
+  "signals": [
+   1,
+   6
+  ],
+  "idea": false,
+  "order": 108,
+  "notes": ""
+ },
+ "stor-thumbnail-critique-and-redesign-pass": {
+  "title": "Thumbnail critique-and-redesign pass",
+  "area": "Store page",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Critique the current thumbnail first (what doesn't read at tile size), then redesign: bright, saturated, one focal action.",
+  "signals": [
+   1
+  ],
+  "idea": false,
+  "order": 109,
+  "notes": ""
+ },
+ "laun-make-the-chase-clip-worthy-for-roblox-moments": {
+  "title": "Make the chase clip-worthy for Roblox Moments",
+  "area": "Launch & updates",
+  "phase": "After launch",
+  "priority": "P3",
+  "status": "todo",
+  "detail": "Moments lets players discover games through short gameplay clips. Make escapes and catches look and sound great so they get shared.",
+  "signals": [
+   1,
+   5
+  ],
+  "idea": true,
+  "order": 110,
+  "notes": ""
+ },
+ "anal-read-retention-by-acquisition-source": {
+  "title": "Read retention by acquisition source",
+  "area": "Analytics",
+  "phase": "After launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Creator Analytics splits retention by source. Only Home traffic counts toward the signals; compare it with ads and search.",
+  "signals": [
+   3
+  ],
+  "idea": false,
+  "order": 111,
+  "notes": ""
+ },
+ "mons-show-off-monsters-to-other-players": {
+  "title": "Show off monsters to other players",
+  "area": "Monsters",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Rare monsters visible in bases and while carried, so collections become status (a big part of why similar games spread).",
+  "signals": [
+   5,
+   4
+  ],
+  "idea": false,
+  "order": 112,
+  "notes": ""
+ },
+ "econ-risk-choice-rare-trees-drop-better-but-chase-harder": {
+  "title": "Risk choice: Rare trees drop better but chase harder",
+  "area": "Economy & progression",
+  "phase": "Before launch",
+  "priority": "P3",
+  "status": "todo",
+  "detail": "Give players a real decision about when to risk a harder tree.",
+  "signals": [
+   4
+  ],
+  "idea": false,
+  "order": 113,
+  "notes": ""
+ },
+ "rete-developer-hosted-live-events": {
+  "title": "Developer-hosted live events",
+  "area": "Retention",
+  "phase": "After launch",
+  "priority": "P3",
+  "status": "todo",
+  "detail": "You join a server and trigger events (Monster Rain, golden drops). Rewards being online.",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": true,
+  "order": 114,
+  "notes": ""
  }
 }

@@ -4,6 +4,8 @@ A Roblox game, built to earn a spot in Home's **Recommended For You** row.
 
 ## Start here
 
+- [`docs/KNOWLEDGE.md`](docs/KNOWLEDGE.md): everything learned so far (2026 discovery changes, thumbnails,
+  lessons from similar games), with sources and confidence. **Claude sessions should read this first.**
 - [`docs/VIDEO_NOTES.md`](docs/VIDEO_NOTES.md): what Roblox's 8 official discovery signals are
   and how they're measured.
 - [`docs/ROBLOX_ALGORITHM_PLAYBOOK.md`](docs/ROBLOX_ALGORITHM_PLAYBOOK.md): every suggestion for

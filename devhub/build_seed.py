@@ -173,6 +173,15 @@ t(A, "launch", "P1", "todo", "Fix wherever the onboarding funnel drops most", ""
 t(A, "post", "P2", "todo", "Update every 1–2 weeks", "New zone, monsters or event. Roblox re-tests games on new players after updates.", [3])
 t(A, "post", "P2", "todo", "Watch signals for 7 days after each update", "If bounce rises, fix onboarding first.", [2])
 
+# ---- Added from research (2026-11-15, see docs/KNOWLEDGE.md) ---------------------
+t("Store page", "pre", "P2", "todo", "15–30 s gameplay video for Home previews", "Home auto-plays a game's video when players hover (desktop) or pause on it (mobile). Show shake → monster pops out → claw chase → deposit → coins. Ranking effect unclear; it helps clicks.", [1, 6])
+t("Store page", "pre", "P2", "todo", "Thumbnail critique-and-redesign pass", "Critique the current thumbnail first (what doesn't read at tile size), then redesign: bright, saturated, one focal action.", [1])
+t("Launch & updates", "post", "P3", "todo", "Make the chase clip-worthy for Roblox Moments", "Moments lets players discover games through short gameplay clips. Make escapes and catches look and sound great so they get shared.", [1, 5], idea=True)
+t("Analytics", "post", "P2", "todo", "Read retention by acquisition source", "Creator Analytics splits retention by source. Only Home traffic counts toward the signals; compare it with ads and search.", [3])
+t("Monsters", "pre", "P2", "todo", "Show off monsters to other players", "Rare monsters visible in bases and while carried, so collections become status (a big part of why similar games spread).", [5, 4])
+t("Economy & progression", "pre", "P3", "todo", "Risk choice: Rare trees drop better but chase harder", "Give players a real decision about when to risk a harder tree.", [4])
+t("Retention", "post", "P3", "todo", "Developer-hosted live events", "You join a server and trigger events (Monster Rain, golden drops). Rewards being online.", [3, 4], idea=True)
+
 out = sys.argv[1]
 os.makedirs(os.path.join(out, "docs"), exist_ok=True)
 for doc_id, doc in tasks:
