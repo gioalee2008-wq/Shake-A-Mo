@@ -1,0 +1,1613 @@
+{
+ "core-shake-prompt-e-mash-meter": {
+  "title": "Shake prompt + E-mash meter",
+  "area": "Core loop",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "done",
+  "detail": "Press E at a tree, mash E for 3 s; 24 counted presses = full meter. Play PASS (v53).",
+  "signals": [
+   2,
+   4
+  ],
+  "idea": false,
+  "order": 0,
+  "notes": ""
+ },
+ "core-drop-odds-per-tree-class-full-meter-boost": {
+  "title": "Drop odds per tree class + full-meter boost",
+  "area": "Core loop",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "done",
+  "detail": "Common tree 85/13/2, Uncommon 55/40/5, Rare 35/50/15. Full meter: Uncommon ×3, Rare ×5.",
+  "signals": [
+   4
+  ],
+  "idea": false,
+  "order": 1,
+  "notes": ""
+ },
+ "core-claw-branch-chase-catch-and-escape": {
+  "title": "Claw-branch chase, catch and escape",
+  "area": "Core loop",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "done",
+  "detail": "Tree roars, claw bursts from the canopy and chases the thief. Catch within 4 studs, homes in within 14 studs. Safe zone ends the chase.",
+  "signals": [
+   2,
+   4
+  ],
+  "idea": false,
+  "order": 2,
+  "notes": ""
+ },
+ "core-carry-monster-and-deposit-at-base": {
+  "title": "Carry monster and deposit at base",
+  "area": "Core loop",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "done",
+  "detail": "Carried monsters shrink to max 5 studs and are restored on deposit. Deposit adds the monster to your base income.",
+  "signals": [
+   4
+  ],
+  "idea": false,
+  "order": 3,
+  "notes": ""
+ },
+ "core-shake-ui-v2-big-e-key-rising-bar-graded-pop-ups": {
+  "title": "Shake UI v2: big E key, rising bar, graded pop-ups",
+  "area": "Core loop",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "doing",
+  "detail": "Not Bad! (red) / Good! (orange) / Great! (yellow) / Perfect! (green, full meter only). Written locally; the push into Studio was cut off by the usage limit. Check it's in Studio, preview, then save the place.",
+  "signals": [
+   2
+  ],
+  "idea": false,
+  "order": 4,
+  "notes": ""
+ },
+ "core-guarantee-a-drop-on-a-player-s-very-first-shake": {
+  "title": "Guarantee a drop on a player's very first shake",
+  "area": "Core loop",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "A new player's first shake always drops a monster, so the first 30 seconds end in a win.",
+  "signals": [
+   2
+  ],
+  "idea": false,
+  "order": 5,
+  "notes": ""
+ },
+ "core-easier-first-2-3-chases-for-new-players": {
+  "title": "Easier first 2–3 chases for new players",
+  "area": "Core loop",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "Slower claw or a closer safe zone for a player's first few steals. Being caught on the first try makes people leave.",
+  "signals": [
+   2
+  ],
+  "idea": false,
+  "order": 6,
+  "notes": ""
+ },
+ "core-re-balance-escape-after-14-stud-homing-and-1-5-players": {
+  "title": "Re-balance escape after 14-stud homing and 1.5× players",
+  "area": "Core loop",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "Homing made escapes harder. Re-run the escape test (earlier sim: ~12-stud gap at WalkSpeed 16) with real avatars.",
+  "signals": [
+   2,
+   4
+  ],
+  "idea": false,
+  "order": 7,
+  "notes": ""
+ },
+ "core-pity-monster-when-a-new-player-is-caught": {
+  "title": "Pity monster when a new player is caught",
+  "area": "Core loop",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "If a new player gets caught, the tree still drops a small monster so they win something.",
+  "signals": [
+   2
+  ],
+  "idea": true,
+  "order": 8,
+  "notes": ""
+ },
+ "core-shake-together-friends-fill-the-meter-faster": {
+  "title": "Shake together: friends fill the meter faster",
+  "area": "Core loop",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Two or more friends mashing the same tree share one meter, fill it faster and get better luck.",
+  "signals": [
+   5
+  ],
+  "idea": true,
+  "order": 9,
+  "notes": ""
+ },
+ "core-decoy-play-a-friend-distracts-the-claw": {
+  "title": "Decoy play: a friend distracts the claw",
+  "area": "Core loop",
+  "phase": "After launch",
+  "priority": "P3",
+  "status": "todo",
+  "detail": "The claw targets the nearest player, so one friend can pull it away while the other runs with the monster.",
+  "signals": [
+   5
+  ],
+  "idea": true,
+  "order": 10,
+  "notes": ""
+ },
+ "tree-block-guardian-style-locked-as-main-tree-style": {
+  "title": "Block Guardian style locked as main tree style",
+  "area": "Trees & art",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "done",
+  "detail": "Cubes with ground stud material, ~68 studs tall, sleeping face with z's, angry when shaken, stepped canopy, roots in the ground. Backup in ServerStorage.",
+  "signals": [
+   1
+  ],
+  "idea": false,
+  "order": 11,
+  "notes": ""
+ },
+ "tree-eyes-follow-the-player-claw-always-faces-the-player": {
+  "title": "Eyes follow the player, claw always faces the player",
+  "area": "Trees & art",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "done",
+  "detail": "Pupils track your head while awake; claw turns toward the chased player.",
+  "signals": [
+   2
+  ],
+  "idea": false,
+  "order": 12,
+  "notes": ""
+ },
+ "tree-decide-rebuild-the-3-protected-forest-trees-in-block-guardia": {
+  "title": "Decide: rebuild the 3 protected Forest trees in Block Guardian style?",
+  "area": "Trees & art",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "The 6 older trees are smooth/realistic; the locked style is blocky. Replacing the protected Forest trees needs the owner's OK.",
+  "signals": [
+   1
+  ],
+  "idea": false,
+  "order": 13,
+  "notes": ""
+ },
+ "tree-thumbnail-ready-hero-shot-of-an-angry-block-guardian": {
+  "title": "Thumbnail-ready hero shot of an angry Block Guardian",
+  "area": "Trees & art",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Pose the Candy tree mid-chase with a player carrying a monster; use it for the icon and thumbnails.",
+  "signals": [
+   1
+  ],
+  "idea": false,
+  "order": 14,
+  "notes": ""
+ },
+ "zone-forest-grove-mossy-buddy-oak": {
+  "title": "Forest Grove: Mossy Buddy Oak",
+  "area": "Zones & content",
+  "phase": "Before launch",
+  "priority": "P1",
+  "status": "done",
+  "detail": "Shakeable, rigged, Play PASS.",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 15,
+  "notes": "",
+  "zone": "Forest Grove",
+  "slot": "Common",
+  "kind": "tree"
+ },
+ "zone-forest-grove-applewood-guardian": {
+  "title": "Forest Grove: Applewood Guardian",
+  "area": "Zones & content",
+  "phase": "Before launch",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "Placed as decoration only. Too dark from the path. Make shakeable or rebuild.",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 16,
+  "notes": "",
+  "zone": "Forest Grove",
+  "slot": "Uncommon",
+  "kind": "tree"
+ },
+ "zone-forest-grove-crystal-thornwood": {
+  "title": "Forest Grove: Crystal Thornwood",
+  "area": "Zones & content",
+  "phase": "Before launch",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "Placed as decoration only. Make shakeable or rebuild.",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 17,
+  "notes": "",
+  "zone": "Forest Grove",
+  "slot": "Rare",
+  "kind": "tree"
+ },
+ "zone-forest-grove-8-forest-monsters": {
+  "title": "Forest Grove: 8 Forest monsters",
+  "area": "Zones & content",
+  "phase": "Before launch",
+  "priority": "P1",
+  "status": "done",
+  "detail": "Leafling, Bunfruit, MushroomBuddy, Frogstump, Brambleboar, Glimmerdeer, Rockmoss, Wispfox.",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 18,
+  "notes": "",
+  "zone": "Forest Grove",
+  "slot": "Monsters",
+  "kind": "monsters"
+ },
+ "zone-candy-canopy-block-guardian-sample": {
+  "title": "Candy Canopy: Block Guardian sample",
+  "area": "Zones & content",
+  "phase": "Before launch",
+  "priority": "P1",
+  "status": "done",
+  "detail": "Approved and Play-tested (v75).",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 19,
+  "notes": "",
+  "zone": "Candy Canopy",
+  "slot": "Common",
+  "kind": "tree"
+ },
+ "zone-candy-canopy-candy-uncommon-tree": {
+  "title": "Candy Canopy: Candy Uncommon tree",
+  "area": "Zones & content",
+  "phase": "Before launch",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "Bigger, richer Block Guardian shape.",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 20,
+  "notes": "",
+  "zone": "Candy Canopy",
+  "slot": "Uncommon",
+  "kind": "tree"
+ },
+ "zone-candy-canopy-candy-rare-tree": {
+  "title": "Candy Canopy: Candy Rare tree",
+  "area": "Zones & content",
+  "phase": "Before launch",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "Biggest shape with a crown silhouette.",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 21,
+  "notes": "",
+  "zone": "Candy Canopy",
+  "slot": "Rare",
+  "kind": "tree"
+ },
+ "zone-candy-canopy-candy-monster-set": {
+  "title": "Candy Canopy: Candy monster set",
+  "area": "Zones & content",
+  "phase": "Before launch",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "None yet: the Candy tree drops Forest monsters for now.",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 22,
+  "notes": "",
+  "zone": "Candy Canopy",
+  "slot": "Monsters",
+  "kind": "monsters"
+ },
+ "zone-sandy-orchard-sunleaf-palm": {
+  "title": "Sandy Orchard: Sunleaf Palm",
+  "area": "Zones & content",
+  "phase": "Before launch",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "Decoration only. Rebuild in Block Guardian style and make shakeable.",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 23,
+  "notes": "",
+  "zone": "Sandy Orchard",
+  "slot": "Common",
+  "kind": "tree"
+ },
+ "zone-sandy-orchard-blossom-canopy": {
+  "title": "Sandy Orchard: Blossom Canopy",
+  "area": "Zones & content",
+  "phase": "Before launch",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "Decoration only. Rebuild and make shakeable.",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 24,
+  "notes": "",
+  "zone": "Sandy Orchard",
+  "slot": "Uncommon",
+  "kind": "tree"
+ },
+ "zone-sandy-orchard-amber-sunwood": {
+  "title": "Sandy Orchard: Amber Sunwood",
+  "area": "Zones & content",
+  "phase": "Before launch",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "Decoration only. Rebuild and make shakeable.",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 25,
+  "notes": "",
+  "zone": "Sandy Orchard",
+  "slot": "Rare",
+  "kind": "tree"
+ },
+ "zone-sandy-orchard-sandy-monster-set": {
+  "title": "Sandy Orchard: Sandy monster set",
+  "area": "Zones & content",
+  "phase": "Before launch",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 26,
+  "notes": "",
+  "zone": "Sandy Orchard",
+  "slot": "Monsters",
+  "kind": "monsters"
+ },
+ "zone-icy-thicket-icy-common-tree": {
+  "title": "Icy Thicket: Icy Common tree",
+  "area": "Zones & content",
+  "phase": "After launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Ship this zone as a post-launch update; each update gets tested on new players.",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 27,
+  "notes": "",
+  "zone": "Icy Thicket",
+  "slot": "Common",
+  "kind": "tree"
+ },
+ "zone-icy-thicket-icy-uncommon-tree": {
+  "title": "Icy Thicket: Icy Uncommon tree",
+  "area": "Zones & content",
+  "phase": "After launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Ship this zone as a post-launch update; each update gets tested on new players.",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 28,
+  "notes": "",
+  "zone": "Icy Thicket",
+  "slot": "Uncommon",
+  "kind": "tree"
+ },
+ "zone-icy-thicket-icy-rare-tree": {
+  "title": "Icy Thicket: Icy Rare tree",
+  "area": "Zones & content",
+  "phase": "After launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Ship this zone as a post-launch update; each update gets tested on new players.",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 29,
+  "notes": "",
+  "zone": "Icy Thicket",
+  "slot": "Rare",
+  "kind": "tree"
+ },
+ "zone-icy-thicket-icy-monster-set": {
+  "title": "Icy Thicket: Icy monster set",
+  "area": "Zones & content",
+  "phase": "After launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 30,
+  "notes": "",
+  "zone": "Icy Thicket",
+  "slot": "Monsters",
+  "kind": "monsters"
+ },
+ "zone-volcanic-woods-volcanic-common-tree": {
+  "title": "Volcanic Woods: Volcanic Common tree",
+  "area": "Zones & content",
+  "phase": "After launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Ship this zone as a post-launch update; each update gets tested on new players.",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 31,
+  "notes": "",
+  "zone": "Volcanic Woods",
+  "slot": "Common",
+  "kind": "tree"
+ },
+ "zone-volcanic-woods-volcanic-uncommon-tree": {
+  "title": "Volcanic Woods: Volcanic Uncommon tree",
+  "area": "Zones & content",
+  "phase": "After launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Ship this zone as a post-launch update; each update gets tested on new players.",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 32,
+  "notes": "",
+  "zone": "Volcanic Woods",
+  "slot": "Uncommon",
+  "kind": "tree"
+ },
+ "zone-volcanic-woods-volcanic-rare-tree": {
+  "title": "Volcanic Woods: Volcanic Rare tree",
+  "area": "Zones & content",
+  "phase": "After launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Ship this zone as a post-launch update; each update gets tested on new players.",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 33,
+  "notes": "",
+  "zone": "Volcanic Woods",
+  "slot": "Rare",
+  "kind": "tree"
+ },
+ "zone-volcanic-woods-volcanic-monster-set": {
+  "title": "Volcanic Woods: Volcanic monster set",
+  "area": "Zones & content",
+  "phase": "After launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 34,
+  "notes": "",
+  "zone": "Volcanic Woods",
+  "slot": "Monsters",
+  "kind": "monsters"
+ },
+ "zone-cosmic-orchard-cosmic-common-tree": {
+  "title": "Cosmic Orchard: Cosmic Common tree",
+  "area": "Zones & content",
+  "phase": "After launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Ship this zone as a post-launch update; each update gets tested on new players.",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 35,
+  "notes": "",
+  "zone": "Cosmic Orchard",
+  "slot": "Common",
+  "kind": "tree"
+ },
+ "zone-cosmic-orchard-cosmic-uncommon-tree": {
+  "title": "Cosmic Orchard: Cosmic Uncommon tree",
+  "area": "Zones & content",
+  "phase": "After launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Ship this zone as a post-launch update; each update gets tested on new players.",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 36,
+  "notes": "",
+  "zone": "Cosmic Orchard",
+  "slot": "Uncommon",
+  "kind": "tree"
+ },
+ "zone-cosmic-orchard-cosmic-rare-tree": {
+  "title": "Cosmic Orchard: Cosmic Rare tree",
+  "area": "Zones & content",
+  "phase": "After launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Ship this zone as a post-launch update; each update gets tested on new players.",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 37,
+  "notes": "",
+  "zone": "Cosmic Orchard",
+  "slot": "Rare",
+  "kind": "tree"
+ },
+ "zone-cosmic-orchard-cosmic-monster-set": {
+  "title": "Cosmic Orchard: Cosmic monster set",
+  "area": "Zones & content",
+  "phase": "After launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 38,
+  "notes": "",
+  "zone": "Cosmic Orchard",
+  "slot": "Monsters",
+  "kind": "monsters"
+ },
+ "zone-all-6-zones-built-blocky-trench-style": {
+  "title": "All 6 zones built (Blocky Trench style)",
+  "area": "Zones & content",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "done",
+  "detail": "Forest, Sandy, Candy, Icy, Volcanic, Cosmic (v46).",
+  "signals": [],
+  "idea": false,
+  "order": 39,
+  "notes": ""
+ },
+ "zone-spawn-new-players-facing-a-common-tree-a-few-steps-away": {
+  "title": "Spawn new players facing a Common tree a few steps away",
+  "area": "Zones & content",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "No walking around to find the game. The first tree is visible from spawn.",
+  "signals": [
+   2
+  ],
+  "idea": false,
+  "order": 40,
+  "notes": ""
+ },
+ "zone-zone-unlock-path": {
+  "title": "Zone unlock path",
+  "area": "Zones & content",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Each zone unlocks with coins/progress so there's always a next goal inside the first hour.",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 41,
+  "notes": ""
+ },
+ "mons-scale-monsters-up-to-match-1-5-players": {
+  "title": "Scale monsters up to match 1.5× players",
+  "area": "Monsters",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "At 1.5× players, monsters look a third smaller. You flagged small monsters twice before.",
+  "signals": [
+   4
+  ],
+  "idea": false,
+  "order": 42,
+  "notes": ""
+ },
+ "mons-play-test-the-big-monster-sizes": {
+  "title": "Play-test the big monster sizes",
+  "area": "Monsters",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "Sizes from v58 were only checked in Edit.",
+  "signals": [],
+  "idea": false,
+  "order": 43,
+  "notes": ""
+ },
+ "mons-monster-index-collection-book-per-zone": {
+  "title": "Monster Index (collection book per zone)",
+  "area": "Monsters",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "\"Collect all 8 Forest monsters\" gives a long-term goal and a reason to come back.",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 44,
+  "notes": ""
+ },
+ "mons-golden-shiny-monster-variants": {
+  "title": "Golden / shiny monster variants",
+  "area": "Monsters",
+  "phase": "After launch",
+  "priority": "P3",
+  "status": "todo",
+  "detail": "Rare variant with extra income. A collection goal that brings players back.",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": true,
+  "order": 45,
+  "notes": ""
+ },
+ "econ-income-per-second-per-monster-approved-set-a": {
+  "title": "Income per second per monster (approved set A)",
+  "area": "Economy & progression",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "done",
+  "detail": "Leafling 5 → Wispfox 220 coins/s.",
+  "signals": [
+   4
+  ],
+  "idea": false,
+  "order": 46,
+  "notes": ""
+ },
+ "econ-base-storage-10-20-slots-with-upgrades": {
+  "title": "Base storage 10 → 20 slots with upgrades",
+  "area": "Economy & progression",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "done",
+  "detail": "12 (10K), 14 (50K), 16 (200K), 18 (750K), 20 (2.5M). Full base auto-swaps the weakest. Save/rejoin PASS.",
+  "signals": [
+   4
+  ],
+  "idea": false,
+  "order": 47,
+  "notes": ""
+ },
+ "econ-show-income-per-second-on-the-hud-again": {
+  "title": "Show income per second on the HUD again",
+  "area": "Economy & progression",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "Removed in the HUD redesign. Watching income grow keeps players playing.",
+  "signals": [
+   4
+  ],
+  "idea": false,
+  "order": 48,
+  "notes": ""
+ },
+ "econ-offline-earnings-with-a-collect-moment-on-return": {
+  "title": "Offline earnings with a Collect moment on return",
+  "area": "Economy & progression",
+  "phase": "Before launch",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "Monsters keep earning while away, capped at a few hours. Show a big Collect screen on rejoin.",
+  "signals": [
+   3
+  ],
+  "idea": false,
+  "order": 49,
+  "notes": ""
+ },
+ "econ-plan-the-first-60-minutes-of-goals": {
+  "title": "Plan the first 60 minutes of goals",
+  "area": "Economy & progression",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "e.g. 0–5 min first deposit, ~15 min storage upgrade, ~30 min next zone, ~60 min first Rare. Only 60 min/day count.",
+  "signals": [
+   4
+  ],
+  "idea": false,
+  "order": 50,
+  "notes": ""
+ },
+ "econ-speed-upgrade-path": {
+  "title": "Speed upgrade path",
+  "area": "Economy & progression",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Decide how speed is earned/upgraded and how it interacts with chase balance.",
+  "signals": [
+   4
+  ],
+  "idea": false,
+  "order": 51,
+  "notes": ""
+ },
+ "econ-rebirth-system": {
+  "title": "Rebirth system",
+  "area": "Economy & progression",
+  "phase": "After launch",
+  "priority": "P3",
+  "status": "todo",
+  "detail": "Reset progress for a permanent multiplier: long-term goal for players past the first week.",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 52,
+  "notes": ""
+ },
+ "uihu-hud-layout-v64-shop-index-left-monsters-right-money-speed-bo": {
+  "title": "HUD layout v64: Shop/Index left, Monsters right, money + speed bottom-left",
+  "area": "UI & HUD",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "done",
+  "detail": "New cartoon money and speed icons, no backgrounds.",
+  "signals": [],
+  "idea": false,
+  "order": 53,
+  "notes": ""
+ },
+ "uihu-phone-layout-pass": {
+  "title": "Phone layout pass",
+  "area": "UI & HUD",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "Money/speed sit near the thumbstick; check on a real phone.",
+  "signals": [
+   2
+  ],
+  "idea": false,
+  "order": 54,
+  "notes": ""
+ },
+ "uihu-monsters-menu-currently-coming-soon": {
+  "title": "Monsters menu (currently \"coming soon\")",
+  "area": "UI & HUD",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "",
+  "signals": [
+   4
+  ],
+  "idea": false,
+  "order": 55,
+  "notes": ""
+ },
+ "uihu-index-menu-ui": {
+  "title": "Index menu UI",
+  "area": "UI & HUD",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Shows collected / missing monsters per zone.",
+  "signals": [
+   3
+  ],
+  "idea": false,
+  "order": 56,
+  "notes": ""
+ },
+ "uihu-shop-ui-for-robux-products": {
+  "title": "Shop UI for Robux products",
+  "area": "UI & HUD",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Luck Potion, Speed Boost, ×2 Income.",
+  "signals": [
+   7,
+   8
+  ],
+  "idea": false,
+  "order": 57,
+  "notes": ""
+ },
+ "onbo-no-menus-or-long-loading-before-play": {
+  "title": "No menus or long loading before play",
+  "area": "Onboarding",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "Spawn straight into the world; no Play button, no settings screen.",
+  "signals": [
+   2,
+   6
+  ],
+  "idea": false,
+  "order": 58,
+  "notes": ""
+ },
+ "onbo-guide-arrow-tree-shake-run-base": {
+  "title": "Guide arrow: tree → shake → run → base",
+  "area": "Onboarding",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "A bouncing arrow/highlight instead of text walls. Disappears after the first deposit.",
+  "signals": [
+   2
+  ],
+  "idea": false,
+  "order": 59,
+  "notes": ""
+ },
+ "onbo-onboarding-funnel-analytics": {
+  "title": "Onboarding funnel analytics",
+  "area": "Onboarding",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "AnalyticsService onboarding steps: Joined → FirstShake → FirstDrop → FirstEscape → FirstDeposit. Shows exactly where new players quit.",
+  "signals": [
+   2
+  ],
+  "idea": false,
+  "order": 60,
+  "notes": ""
+ },
+ "onbo-first-deposit-celebration": {
+  "title": "First-deposit celebration",
+  "area": "Onboarding",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Coins tick up immediately with a sound and burst after the first deposit.",
+  "signals": [
+   2
+  ],
+  "idea": false,
+  "order": 61,
+  "notes": ""
+ },
+ "rete-daily-reward-streak-with-countdown": {
+  "title": "Daily reward streak with countdown",
+  "area": "Retention",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "7-day cycle, \"next reward in HH:MM:SS\", streak freezes. Port the logic from src/server/Services/DailyReturn.luau.",
+  "signals": [
+   3
+  ],
+  "idea": false,
+  "order": 62,
+  "notes": ""
+ },
+ "rete-playtime-gifts-up-to-60-active-minutes": {
+  "title": "Playtime gifts up to 60 active minutes",
+  "area": "Retention",
+  "phase": "Before launch",
+  "priority": "P3",
+  "status": "todo",
+  "detail": "Stops at 60 because Roblox only counts 60 min/day. Port from PlaytimeGoals.luau.",
+  "signals": [
+   4
+  ],
+  "idea": false,
+  "order": 63,
+  "notes": ""
+ },
+ "rete-golden-tree-once-per-day": {
+  "title": "Golden Tree once per day",
+  "area": "Retention",
+  "phase": "After launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "A special tree appears once a day with much better drops.",
+  "signals": [
+   3
+  ],
+  "idea": true,
+  "order": 64,
+  "notes": ""
+ },
+ "rete-lucky-zone-of-the-day": {
+  "title": "Lucky Zone of the day",
+  "area": "Retention",
+  "phase": "After launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "One zone has boosted Rare odds today, rotating daily.",
+  "signals": [
+   3
+  ],
+  "idea": true,
+  "order": 65,
+  "notes": ""
+ },
+ "rete-server-events-every-15-20-minutes": {
+  "title": "Server events every 15–20 minutes",
+  "area": "Retention",
+  "phase": "After launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "\"Monster Rain\", \"All trees wake up!\": reasons to stay in the session.",
+  "signals": [
+   4
+  ],
+  "idea": false,
+  "order": 66,
+  "notes": ""
+ },
+ "rete-tomorrow-s-tree-preview": {
+  "title": "Tomorrow's tree preview",
+  "area": "Retention",
+  "phase": "After launch",
+  "priority": "P3",
+  "status": "todo",
+  "detail": "End of session shows a locked silhouette that unlocks tomorrow.",
+  "signals": [
+   3
+  ],
+  "idea": true,
+  "order": 67,
+  "notes": ""
+ },
+ "rete-opt-in-reminder-notifications": {
+  "title": "Opt-in reminder notifications",
+  "area": "Retention",
+  "phase": "After launch",
+  "priority": "P3",
+  "status": "todo",
+  "detail": "Prompt after a reward claim; create templates in Creator Hub; send \"your earnings are ready\".",
+  "signals": [
+   3
+  ],
+  "idea": false,
+  "order": 68,
+  "notes": ""
+ },
+ "rete-28-day-seasons": {
+  "title": "28-day seasons",
+  "area": "Retention",
+  "phase": "After launch",
+  "priority": "P3",
+  "status": "todo",
+  "detail": "Four weekly chapters ending on day 28, matching the algorithm's window.",
+  "signals": [
+   3
+  ],
+  "idea": true,
+  "order": 69,
+  "notes": ""
+ },
+ "soci-invite-button": {
+  "title": "Invite button",
+  "area": "Social",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "SocialService invite prompt with a short message.",
+  "signals": [
+   5
+  ],
+  "idea": false,
+  "order": 70,
+  "notes": ""
+ },
+ "soci-friend-bonus-more-income-luck-with-friends-in-the-server": {
+  "title": "Friend bonus: more income/luck with friends in the server",
+  "area": "Social",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "+10% per friend, capped. Port from CoPlay.luau.",
+  "signals": [
+   5
+  ],
+  "idea": false,
+  "order": 71,
+  "notes": ""
+ },
+ "soci-free-private-servers": {
+  "title": "Free private servers",
+  "area": "Social",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Set the private server price to 0 in Creator Hub. Private servers count as co-play.",
+  "signals": [
+   5
+  ],
+  "idea": false,
+  "order": 72,
+  "notes": ""
+ },
+ "soci-invite-rewards-for-inviter-and-joiner": {
+  "title": "Invite rewards for inviter and joiner",
+  "area": "Social",
+  "phase": "After launch",
+  "priority": "P3",
+  "status": "todo",
+  "detail": "Via Player:GetJoinData().ReferredByPlayerId, capped per day.",
+  "signals": [
+   5
+  ],
+  "idea": false,
+  "order": 73,
+  "notes": ""
+ },
+ "soci-spawn-friends-next-to-each-other": {
+  "title": "Spawn friends next to each other",
+  "area": "Social",
+  "phase": "After launch",
+  "priority": "P3",
+  "status": "todo",
+  "detail": "When someone joins by following a friend, spawn them near that friend.",
+  "signals": [
+   5
+  ],
+  "idea": false,
+  "order": 74,
+  "notes": ""
+ },
+ "mone-safe-purchase-handling-processreceipt": {
+  "title": "Safe purchase handling (ProcessReceipt)",
+  "area": "Monetization",
+  "phase": "Before launch",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "Save the receipt before granting; never double-grant. See Monetization.luau.",
+  "signals": [
+   7,
+   8
+  ],
+  "idea": false,
+  "order": 75,
+  "notes": ""
+ },
+ "mone-luck-potion-15-min": {
+  "title": "Luck Potion (15 min)",
+  "area": "Monetization",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Cheap, repeatable developer product: better drop odds for 15 minutes.",
+  "signals": [
+   7,
+   8
+  ],
+  "idea": false,
+  "order": 76,
+  "notes": ""
+ },
+ "mone-speed-boost": {
+  "title": "Speed Boost",
+  "area": "Monetization",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Cheap, repeatable developer product. Must not make the chase trivial.",
+  "signals": [
+   7,
+   8
+  ],
+  "idea": false,
+  "order": 77,
+  "notes": ""
+ },
+ "mone-2-income-game-pass": {
+  "title": "×2 Income game pass",
+  "area": "Monetization",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "",
+  "signals": [
+   8
+  ],
+  "idea": false,
+  "order": 78,
+  "notes": ""
+ },
+ "mone-rotating-daily-deal": {
+  "title": "Rotating daily deal",
+  "area": "Monetization",
+  "phase": "After launch",
+  "priority": "P3",
+  "status": "todo",
+  "detail": "One cheap product changes every day: more spend days, less pressure.",
+  "signals": [
+   7
+  ],
+  "idea": false,
+  "order": 79,
+  "notes": ""
+ },
+ "data-saveservice-with-storage-field-save-rejoin-pass": {
+  "title": "SaveService with storage field (save/rejoin PASS)",
+  "area": "Data & saving",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "done",
+  "detail": "",
+  "signals": [
+   3
+  ],
+  "idea": false,
+  "order": 80,
+  "notes": ""
+ },
+ "data-review-saving-for-dupes-session-lock-bindtoclose": {
+  "title": "Review saving for dupes: session lock + BindToClose",
+  "area": "Data & saving",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Player rejoining another server before the save lands can dupe monsters. Compare with PlayerData.luau.",
+  "signals": [
+   3
+  ],
+  "idea": false,
+  "order": 81,
+  "notes": ""
+ },
+ "vfxa-forgegui-particle-sprites-bark": {
+  "title": "ForgeGUI particle sprites + bark",
+  "area": "VFX & audio",
+  "phase": "Now",
+  "priority": "P2",
+  "status": "done",
+  "detail": "Leaf, dust puff, sparkle, wood chip sprites; branch bark texture.",
+  "signals": [
+   2
+  ],
+  "idea": false,
+  "order": 82,
+  "notes": ""
+ },
+ "vfxa-forgegui-sound-batch": {
+  "title": "ForgeGUI sound batch",
+  "area": "VFX & audio",
+  "phase": "Before launch",
+  "priority": "P3",
+  "status": "todo",
+  "detail": "Rustle, pop, snap, roar, whoosh, escape jingle.",
+  "signals": [
+   2
+  ],
+  "idea": false,
+  "order": 83,
+  "notes": ""
+ },
+ "vfxa-track-forgegui-credit-balance": {
+  "title": "Track ForgeGUI credit balance",
+  "area": "VFX & audio",
+  "phase": "Before launch",
+  "priority": "P3",
+  "status": "todo",
+  "detail": "ForgeGUI doesn't report per-call cost; check the account page.",
+  "signals": [],
+  "idea": false,
+  "order": 84,
+  "notes": ""
+ },
+ "perf-performance-pass-v57": {
+  "title": "Performance pass (v57)",
+  "area": "Performance & mobile",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "done",
+  "detail": "Shadows trimmed, 6,123 hidden textures and 124 lights removed, streaming radius 512.",
+  "signals": [
+   2
+  ],
+  "idea": false,
+  "order": 85,
+  "notes": ""
+ },
+ "perf-phone-fps-test-during-a-shake": {
+  "title": "Phone FPS test during a shake",
+  "area": "Performance & mobile",
+  "phase": "Before launch",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "The shake moves ~150 parts per frame.",
+  "signals": [
+   2
+  ],
+  "idea": false,
+  "order": 86,
+  "notes": ""
+ },
+ "perf-mobile-tap-controls-test": {
+  "title": "Mobile TAP controls test",
+  "area": "Performance & mobile",
+  "phase": "Before launch",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "Shake button, prompts, carry, deposit on touch.",
+  "signals": [
+   2
+  ],
+  "idea": false,
+  "order": 87,
+  "notes": ""
+ },
+ "perf-fast-first-load": {
+  "title": "Fast first load",
+  "area": "Performance & mobile",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Keep the spawn area light; confirm StreamingEnabled settings.",
+  "signals": [
+   2,
+   6
+  ],
+  "idea": false,
+  "order": 88,
+  "notes": ""
+ },
+ "test-play-test-1-5-players-with-real-avatars": {
+  "title": "Play-test 1.5× players with real avatars",
+  "area": "Testing & QA",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "Hats, hair, carry height, prompts.",
+  "signals": [],
+  "idea": false,
+  "order": 89,
+  "notes": ""
+ },
+ "test-multiplayer-test-with-2-4-players": {
+  "title": "Multiplayer test with 2–4 players",
+  "area": "Testing & QA",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "Stealing, chases, storage and deposit with several players at once. Never tested yet.",
+  "signals": [
+   5
+  ],
+  "idea": false,
+  "order": 90,
+  "notes": ""
+ },
+ "test-fresh-account-first-5-minutes-test-before-every-release": {
+  "title": "Fresh-account first-5-minutes test before every release",
+  "area": "Testing & QA",
+  "phase": "Launch",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "Play as a brand-new account on a phone before publishing.",
+  "signals": [
+   2
+  ],
+  "idea": false,
+  "order": 91,
+  "notes": ""
+ },
+ "tool-put-the-project-under-git-and-push-to-github": {
+  "title": "Put the project under git and push to GitHub",
+  "area": "Tools & workflow",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "The project folder isn't a git repo. Push to gioalee2008-wq/Shake-A-Mo.",
+  "signals": [],
+  "idea": false,
+  "order": 92,
+  "notes": ""
+ },
+ "tool-save-local-copies-of-studio-only-scripts": {
+  "title": "Save local copies of Studio-only scripts",
+  "area": "Tools & workflow",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "LoopConfig, Lib.Monsters, CarryService, DepositService exist only in Studio.",
+  "signals": [],
+  "idea": false,
+  "order": 93,
+  "notes": ""
+ },
+ "tool-backups-approved-decisions-current-status-docs": {
+  "title": "Backups + APPROVED_DECISIONS / CURRENT_STATUS docs",
+  "area": "Tools & workflow",
+  "phase": "Now",
+  "priority": "P2",
+  "status": "done",
+  "detail": "",
+  "signals": [],
+  "idea": false,
+  "order": 94,
+  "notes": ""
+ },
+ "tool-start-a-fresh-claude-session-from-the-handoff-docs": {
+  "title": "Start a fresh Claude session from the handoff docs",
+  "area": "Tools & workflow",
+  "phase": "Now",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "The old session is 68% full and stopped mid-task.",
+  "signals": [],
+  "idea": false,
+  "order": 95,
+  "notes": ""
+ },
+ "tool-rojo-sync-between-files-and-studio": {
+  "title": "Rojo sync between files and Studio",
+  "area": "Tools & workflow",
+  "phase": "Before launch",
+  "priority": "P3",
+  "status": "todo",
+  "detail": "Removes the copy-paste/checksum step.",
+  "signals": [],
+  "idea": false,
+  "order": 96,
+  "notes": ""
+ },
+ "stor-custom-icon": {
+  "title": "Custom icon",
+  "area": "Store page",
+  "phase": "Before launch",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "An angry guardian tree face and a monster. Readable at phone size.",
+  "signals": [
+   1
+  ],
+  "idea": false,
+  "order": 97,
+  "notes": ""
+ },
+ "stor-3-5-thumbnails-of-the-chase-moment": {
+  "title": "3–5 thumbnails of the chase moment",
+  "area": "Store page",
+  "phase": "Before launch",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "Claw chasing a player who carries a monster. No custom thumbnail = no recommendations.",
+  "signals": [
+   1,
+   6
+  ],
+  "idea": false,
+  "order": 98,
+  "notes": ""
+ },
+ "stor-title-and-description-check": {
+  "title": "Title and description check",
+  "area": "Store page",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Keep \"Shake a Monster Tree!\"; describe the loop in one line.",
+  "signals": [
+   1
+  ],
+  "idea": false,
+  "order": 99,
+  "notes": ""
+ },
+ "stor-promise-match-test": {
+  "title": "Promise-match test",
+  "area": "Store page",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Put the thumbnail beside a frame from the first 10 s of play. They must look like the same game.",
+  "signals": [
+   1,
+   2,
+   6
+  ],
+  "idea": true,
+  "order": 100,
+  "notes": ""
+ },
+ "stor-a-b-test-thumbnails": {
+  "title": "A/B test thumbnails",
+  "area": "Store page",
+  "phase": "After launch",
+  "priority": "P3",
+  "status": "todo",
+  "detail": "One change at a time, at least 7 days each.",
+  "signals": [
+   1
+  ],
+  "idea": false,
+  "order": 101,
+  "notes": ""
+ },
+ "anal-session-length-buckets": {
+  "title": "Session length buckets",
+  "area": "Analytics",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "<1 min / 1–3 min / stayed, as custom events.",
+  "signals": [
+   2
+  ],
+  "idea": false,
+  "order": 102,
+  "notes": ""
+ },
+ "anal-weekly-check-of-the-discovery-signals": {
+  "title": "Weekly check of the discovery signals",
+  "area": "Analytics",
+  "phase": "After launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Creator Hub > Analytics. Note the weakest signal and fix it next.",
+  "signals": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "idea": false,
+  "order": 103,
+  "notes": ""
+ },
+ "laun-small-sponsored-ad-test": {
+  "title": "Small Sponsored ad test",
+  "area": "Launch & updates",
+  "phase": "Launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Paid players don't count toward the signals, but they show quickly whether new players bounce.",
+  "signals": [
+   2
+  ],
+  "idea": false,
+  "order": 104,
+  "notes": ""
+ },
+ "laun-fix-wherever-the-onboarding-funnel-drops-most": {
+  "title": "Fix wherever the onboarding funnel drops most",
+  "area": "Launch & updates",
+  "phase": "Launch",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "",
+  "signals": [
+   2
+  ],
+  "idea": false,
+  "order": 105,
+  "notes": ""
+ },
+ "laun-update-every-1-2-weeks": {
+  "title": "Update every 1–2 weeks",
+  "area": "Launch & updates",
+  "phase": "After launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "New zone, monsters or event. Roblox re-tests games on new players after updates.",
+  "signals": [
+   3
+  ],
+  "idea": false,
+  "order": 106,
+  "notes": ""
+ },
+ "laun-watch-signals-for-7-days-after-each-update": {
+  "title": "Watch signals for 7 days after each update",
+  "area": "Launch & updates",
+  "phase": "After launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "If bounce rises, fix onboarding first.",
+  "signals": [
+   2
+  ],
+  "idea": false,
+  "order": 107,
+  "notes": ""
+ }
+}

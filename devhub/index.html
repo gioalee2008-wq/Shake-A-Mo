@@ -1,0 +1,649 @@
+<title>Monster Tree Dev Hub</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: sticky studded header band with view tabs; one centered working column (max 1120px) below. */
+:root {
+  --bg: #f2f4ec;
+  --surface: #ffffff;
+  --surface-2: #e9eee1;
+  --ink: #1d281e;
+  --muted: #5b685b;
+  --line: #d6ddcd;
+  --accent: #2c8a4b;
+  --accent-ink: #ffffff;
+  --idea: #d63d74;
+  --done: #2c8a4b;
+  --doing: #c98a0c;
+  --todo: #6c7a8a;
+  --blocked: #c8402f;
+  --stud: rgba(255, 255, 255, 0.16);
+  --band: #2c6b3c;
+  --band-ink: #f4fbef;
+  --font-display: "Lilita One", "Arial Rounded MT Bold", "Trebuchet MS", sans-serif;
+  --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111711; --surface: #192119; --surface-2: #212b21; --ink: #e7eee3; --muted: #9caa97;
+    --line: #2d3a2d; --accent: #5cc47c; --accent-ink: #0d1a10; --idea: #ff6d9e; --done: #5cc47c;
+    --doing: #f0b43c; --todo: #93a3b5; --blocked: #ff7a66; --stud: rgba(255, 255, 255, 0.07);
+    --band: #1b3a23; --band-ink: #e7f5e2; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111711; --surface: #192119; --surface-2: #212b21; --ink: #e7eee3; --muted: #9caa97;
+  --line: #2d3a2d; --accent: #5cc47c; --accent-ink: #0d1a10; --idea: #ff6d9e; --done: #5cc47c;
+  --doing: #f0b43c; --todo: #93a3b5; --blocked: #ff7a66; --stud: rgba(255, 255, 255, 0.07);
+  --band: #1b3a23; --band-ink: #e7f5e2; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--band); }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing: 0.01em; text-wrap: balance; margin: 0; }
+.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* Header band */
+.band {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background-color: var(--band); color: var(--band-ink);
+  background-image: radial-gradient(circle at 8px 8px, var(--stud) 3.5px, transparent 4px);
+  background-size: 16px 16px;
+}
+.band-inner { max-width: 1120px; margin: 0 auto; padding-block: 12px 0;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.brand { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.brand h1 { font-size: 26px; line-height: 1.1; }
+.brand .sub { font-size: 13px; opacity: 0.85; }
+.sync { margin-left: auto; font-size: 12px; opacity: 0.85; }
+.tabs-scroll { overflow-x: auto; margin-top: 10px; scrollbar-width: none; }
+.tabs { display: flex; gap: 4px; min-width: max-content; }
+.tab { border: 0; background: transparent; color: var(--band-ink); padding: 8px 14px; border-radius: 8px 8px 0 0;
+  font-weight: 600; cursor: pointer; opacity: 0.8; }
+.tab:hover { opacity: 1; }
+.tab[aria-selected="true"] { background: var(--bg); color: var(--ink); opacity: 1; }
+
+main { max-width: 1120px; margin: 0 auto; padding-block: 20px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.view { display: grid; gap: 20px; }
+.notice { padding: 10px 14px; border-radius: var(--radius); background: var(--surface-2); color: var(--muted); font-size: 14px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; min-width: 0; }
+.panel h2 { font-size: 20px; margin-bottom: 10px; }
+.panel h3 { font-size: 17px; }
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+.eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 600; }
+
+/* Overview */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.stat .big { font-family: var(--font-display); font-size: 34px; line-height: 1; }
+.bar { height: 10px; border-radius: 6px; background: var(--surface-2); overflow: hidden; display: flex; }
+.bar > i { display: block; height: 100%; }
+.bar .d { background: var(--done); }
+.bar .g { background: var(--doing); }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 760px) { .two { grid-template-columns: 1fr; } }
+.phase-row { display: grid; grid-template-columns: 120px 1fr 64px; align-items: center; gap: 10px; padding: 6px 0; }
+.areas { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; }
+.area-card { text-align: left; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px;
+  cursor: pointer; display: grid; gap: 8px; }
+.area-card:hover { border-color: var(--accent); }
+.area-card .row { display: flex; justify-content: space-between; gap: 8px; font-weight: 600; }
+
+/* Task rows */
+.list { display: grid; gap: 6px; }
+.group-title { display: flex; align-items: baseline; gap: 10px; margin-top: 6px; }
+.group-title h3 { font-size: 18px; }
+.task { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 12px;
+  display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; align-items: start; }
+.task.is-done .title { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--line); }
+.status { border: 0; border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 700; cursor: pointer; min-width: 64px;
+  color: var(--surface); text-transform: uppercase; letter-spacing: 0.05em; }
+.status[disabled] { cursor: default; }
+.s-done { background: var(--done); }
+.s-doing { background: var(--doing); }
+.s-todo { background: var(--todo); }
+.s-blocked { background: var(--blocked); }
+.title-btn { all: unset; cursor: pointer; font-weight: 600; display: block; }
+.title-btn:focus-visible { outline: 2px solid var(--accent); }
+.chips { grid-column: 2; display: flex; gap: 6px; flex-wrap: wrap; }
+.chip { font-size: 12px; padding: 1px 8px; border-radius: 999px; background: var(--surface-2); color: var(--muted); white-space: nowrap; }
+.chip.p1 { color: var(--blocked); font-weight: 700; }
+.chip.idea { color: var(--idea); font-weight: 700; }
+.chip.sig { font-family: var(--font-mono); }
+.detail { grid-column: 1 / -1; display: grid; gap: 10px; border-top: 1px dashed var(--line); padding-top: 10px; margin-top: 6px; }
+.detail p { margin: 0; max-width: 70ch; }
+.detail textarea { width: 100%; min-height: 70px; border: 1px solid var(--line); border-radius: 8px; padding: 8px; background: var(--bg); resize: vertical; }
+.row-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.btn { border: 1px solid var(--line); background: var(--surface); padding: 6px 12px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.btn.danger { color: var(--blocked); }
+.btn.danger.armed { background: var(--blocked); color: var(--surface); border-color: var(--blocked); }
+
+/* Filters */
+.filters { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.filters input[type="search"] { flex: 1 1 220px; min-width: 0; }
+.field { border: 1px solid var(--line); background: var(--surface); padding: 7px 10px; border-radius: 8px; }
+.check { display: inline-flex; gap: 6px; align-items: center; font-size: 14px; }
+.count { font-size: 13px; color: var(--muted); }
+
+/* Add form */
+.add-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+.add-grid label { display: grid; gap: 4px; font-size: 13px; color: var(--muted); font-weight: 600; }
+.add-grid .wide { grid-column: 1 / -1; }
+.sig-picks { display: flex; gap: 6px; flex-wrap: wrap; }
+.sig-picks label { display: inline-flex; gap: 4px; align-items: center; color: var(--ink); font-weight: 500; }
+
+/* Content matrix */
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 640px; }
+th, td { border-bottom: 1px solid var(--line); padding: 10px 8px; text-align: left; vertical-align: top; }
+th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 700; }
+.cell { all: unset; cursor: pointer; display: grid; gap: 4px; padding: 6px 8px; border-radius: 8px; width: 100%; box-sizing: border-box; }
+.cell:hover { background: var(--surface-2); }
+.cell .name { font-size: 13px; }
+.pill { justify-self: start; font-size: 11px; font-weight: 700; padding: 1px 8px; border-radius: 999px; color: var(--surface); text-transform: uppercase; letter-spacing: 0.05em; }
+.zone-name { font-weight: 700; white-space: nowrap; }
+
+/* Signals */
+.sig-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px; }
+@media (max-width: 420px) { .sig-grid { grid-template-columns: 1fr; } }
+.sig-card { display: grid; gap: 8px; align-content: start; }
+.sig-head { display: flex; gap: 10px; align-items: center; }
+.sig-num { font-family: var(--font-display); font-size: 22px; width: 36px; height: 36px; border-radius: 8px; display: grid; place-items: center;
+  background: var(--band); color: var(--band-ink); flex: none; }
+.badge { font-size: 11px; font-weight: 700; padding: 1px 8px; border-radius: 999px; border: 1px solid currentColor; }
+.badge.top { color: var(--blocked); }
+.badge.imp { color: var(--muted); }
+.mini { display: grid; gap: 3px; margin: 0; padding: 0; list-style: none; font-size: 13px; }
+.mini li { display: flex; gap: 8px; align-items: baseline; }
+.dot { width: 8px; height: 8px; border-radius: 50%; flex: none; transform: translateY(-1px); }
+.d-done { background: var(--done); } .d-doing { background: var(--doing); } .d-todo { background: var(--todo); } .d-blocked { background: var(--blocked); }
+.rules { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+@media (prefers-reduced-motion: no-preference) { .bar > i { transition: width 0.4s ease; } }
+</style>
+
+<header class="band">
+  <div class="band-inner">
+    <div class="brand">
+      <h1>Monster Tree Dev Hub</h1>
+      <span class="sub">SHAKE A Monster Tree! · tasks, content and the 8 Roblox discovery signals</span>
+      <span class="sync" id="sync">Connecting…</span>
+    </div>
+    <div class="tabs-scroll">
+      <nav class="tabs" role="tablist" id="tabs">
+        <button class="tab" role="tab" data-view="overview">Overview</button>
+        <button class="tab" role="tab" data-view="tasks">Tasks</button>
+        <button class="tab" role="tab" data-view="content">Content</button>
+        <button class="tab" role="tab" data-view="signals">Signals</button>
+        <button class="tab" role="tab" data-view="numbers">Numbers &amp; rules</button>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="notice" id="boot-note">Loading your tasks. They're kept in this page's shared database, so ticks you make are saved for next time.</div>
+</main>
+
+<script>
+(() => {
+  "use strict";
+
+  // ---------- Static reference (from the video + the approved project numbers) ----------
+  const PHASES = ["Now", "Before launch", "Launch", "After launch"];
+  const PRIOS = ["P1", "P2", "P3"];
+  const STATUSES = ["todo", "doing", "done", "blocked"];
+  const STATUS_LABEL = { todo: "To do", doing: "Doing", done: "Done", blocked: "Blocked" };
+  const AREAS = ["Core loop", "Trees & art", "Zones & content", "Monsters", "Economy & progression", "UI & HUD",
+    "Onboarding", "Retention", "Social", "Monetization", "Data & saving", "VFX & audio", "Performance & mobile",
+    "Testing & QA", "Tools & workflow", "Store page", "Analytics", "Launch & updates"];
+  const SLOTS = ["Common", "Uncommon", "Rare", "Monsters"];
+  const ZONES = ["Forest Grove", "Candy Canopy", "Sandy Orchard", "Icy Thicket", "Volcanic Woods", "Cosmic Orchard"];
+
+  const SIGNALS = [
+    { n: 1, name: "Play-through rate", top: true, short: "Click",
+      what: "Of players who see the game in Recommended For You, how many click and play.",
+      game: "Icon and thumbnails of the claw chasing a monster thief. No custom thumbnail means no recommendations." },
+    { n: 2, name: "First-play bounce rate", top: true, short: "Stay",
+      what: "Players who leave after a short first session. Under 1 minute is worst. A negative signal.",
+      game: "Spawn facing a tree, first shake always drops, first chases easier, coins tick up right after the first deposit." },
+    { n: 3, name: "Play days per user", top: true, short: "Come back",
+      what: "Distinct days a player plays: Day 1, Days 2–7, up to Day 28.",
+      game: "Offline earnings, daily streak, the Index, Golden Tree of the day, a new zone every update." },
+    { n: 4, name: "Playtime per user", top: true, short: "Play time",
+      what: "Average minutes per day, capped at 60 minutes per player per day.",
+      game: "A 60-minute arc of goals: storage, next zone, first Rare. Income per second on screen. No AFK farming." },
+    { n: 5, name: "Intentional co-play days", top: false, short: "Friends",
+      what: "Days played with friends: joining a friend, an invite, or a private server all count.",
+      game: "Invite button, friend income bonus, free private servers, shake together, decoy chases." },
+    { n: 6, name: "Qualified play sessions", top: false, short: "Real sessions",
+      what: "Sessions from Home clicks where the player really played. Misclicks and quick exits are filtered out.",
+      game: "Honest thumbnail that matches the first 10 seconds, fast loading, rejoin at your base." },
+    { n: 7, name: "Spend days per user", top: false, short: "Spend days",
+      what: "Number of days a player spends Robux, not how much.",
+      game: "Cheap repeatable items: Luck Potion, Speed Boost, a daily deal." },
+    { n: 8, name: "Robux spent per user", top: false, short: "Robux spent",
+      what: "Average Robux per player, non-spenders included. The least important signal.",
+      game: "×2 Income pass and a fair value ladder. Never sell the escape or lock zones behind Robux." },
+  ];
+
+  const NUMBERS = [
+    { title: "Shake and drops", rows: [
+      ["Mash window", "3 s"], ["Full meter", "24 counted E presses"],
+      ["Common tree odds (C/U/R)", "85 / 13 / 2 %"], ["Uncommon tree odds", "55 / 40 / 5 %"], ["Rare tree odds", "35 / 50 / 15 %"],
+      ["Full-meter boost", "Uncommon ×3, Rare ×5"], ["Drop clearance", "5 studs + half the monster's width"],
+    ]},
+    { title: "Chase", rows: [
+      ["Branch tip speed", "21 studs/s, turns 120°/s"], ["Homing range", "14 studs"], ["Catch distance", "4 studs"],
+      ["Player WalkSpeed", "16 (unchanged)"], ["Player scale", "×1.5 on spawn"],
+    ]},
+    { title: "Forest incomes (coins/s)", rows: [
+      ["Leafling", "5"], ["Bunfruit", "8"], ["MushroomBuddy", "12"], ["Frogstump", "30"], ["Brambleboar", "40"],
+      ["Glimmerdeer", "55"], ["Rockmoss", "160"], ["Wispfox", "220"],
+    ]},
+    { title: "Monster sizes (longest side, studs)", rows: [
+      ["Leafling", "5.0"], ["Bunfruit", "5.4"], ["MushroomBuddy", "6.0"], ["Frogstump", "6.8"], ["Brambleboar", "7.8"],
+      ["Glimmerdeer", "8.8"], ["Wispfox", "9.8"], ["Rockmoss", "11.2"], ["Carried max", "5.0"],
+    ]},
+    { title: "Base storage", rows: [
+      ["Start", "10 slots"], ["12 slots", "10K"], ["14 slots", "50K"], ["16 slots", "200K"], ["18 slots", "750K"], ["20 slots", "2.5M"],
+      ["Full base", "Auto-swaps out the weakest monster if the new one earns more"],
+    ]},
+  ];
+
+  const RULES_WORK = [
+    "Never start Studio Play without your OK.",
+    "Back up before changing approved assets (ServerStorage + a local copy).",
+    "Report every change as PASS / FAIL / NOT TESTED.",
+    "No unrelated features. Approved names only.",
+    "New guardian trees reuse the Block Guardian builder with their zone's colors.",
+  ];
+  const RULES_ALGO = [
+    "Only players from Home's Recommended For You count. Ads, search and social traffic don't.",
+    "Every signal is an average per player, so a small game with happy players can win.",
+    "Playtime past 60 minutes a day doesn't count. Don't build AFK farms.",
+    "Money is the least important group. Never trade fun or retention for it.",
+    "After each update Roblox tests the game on new players, so the first minute must stay great.",
+    "Never sell the escape, never lock zones behind Robux, show odds on any paid random item.",
+  ];
+
+  // ---------- State ----------
+  const tasks = new Map();          // id -> data
+  const expanded = new Set();
+  let db = null, col = null;
+  let canWrite = true;
+  let loaded = false;
+  let view = "overview";
+  let renderQueued = false, renderDeferred = false;
+  let addOpen = false;
+  const writeChains = new Map();    // id -> promise (one write at a time per doc)
+
+  const prefsKey = "mt-devhub-filters";
+  const filters = Object.assign({ q: "", area: "", phase: "", signal: "", status: "open", ideas: false, group: "area" }, loadPrefs());
+  function loadPrefs() { try { return JSON.parse(localStorage.getItem(prefsKey) || "{}"); } catch { return {}; } }
+  function savePrefs() { try { localStorage.setItem(prefsKey, JSON.stringify(filters)); } catch { /* storage unavailable */ } }
+
+  const $ = (s, r = document) => r.querySelector(s);
+  const el = (tag, attrs = {}, ...kids) => {
+    const n = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (v === false || v == null) continue;
+      if (k === "class") n.className = v;
+      else if (k === "text") n.textContent = v;
+      else if (k.startsWith("on")) n.addEventListener(k.slice(2), v);
+      else n.setAttribute(k, v === true ? "" : v);
+    }
+    for (const kid of kids.flat()) if (kid != null && kid !== false) n.append(kid.nodeType ? kid : document.createTextNode(String(kid)));
+    return n;
+  };
+
+  // ---------- Data helpers ----------
+  const all = () => [...tasks.entries()].map(([id, d]) => ({ id, ...d }));
+  const rank = (t) => [PHASES.indexOf(t.phase), PRIOS.indexOf(t.priority), t.status === "doing" ? 0 : 1, t.order ?? 9999];
+  const byRank = (a, b) => { const x = rank(a), y = rank(b); for (let i = 0; i < x.length; i++) if (x[i] !== y[i]) return x[i] - y[i]; return 0; };
+  const stats = (list) => {
+    const s = { total: list.length, done: 0, doing: 0, blocked: 0 };
+    for (const t of list) { if (t.status === "done") s.done++; else if (t.status === "doing") s.doing++; else if (t.status === "blocked") s.blocked++; }
+    s.pct = s.total ? Math.round((s.done / s.total) * 100) : 0;
+    return s;
+  };
+  const bar = (s) => el("div", { class: "bar", role: "img", "aria-label": `${s.done} of ${s.total} done` },
+    el("i", { class: "d", style: `width:${s.total ? (s.done / s.total) * 100 : 0}%` }),
+    el("i", { class: "g", style: `width:${s.total ? (s.doing / s.total) * 100 : 0}%` }));
+
+  function queueWrite(id, fn) {
+    const prev = writeChains.get(id) || Promise.resolve();
+    const next = prev.then(fn).catch((e) => {
+      if (e && e.code === "invalid_argument") { canWrite = false; setSync("View only: changes can't be saved for your access level."); scheduleRender(); }
+      else setSync("Couldn't save the last change. Try again in a moment.");
+    });
+    writeChains.set(id, next);
+    return next;
+  }
+  function updateTask(id, patch) {
+    if (!col || !canWrite) return;
+    const cur = tasks.get(id); if (!cur) return;
+    tasks.set(id, { ...cur, ...patch });  // optimistic
+    scheduleRender();
+    queueWrite(id, () => col.doc(id).update(patch));
+  }
+  function cycleStatus(id) {
+    const cur = tasks.get(id); if (!cur) return;
+    const order = ["todo", "doing", "done"];
+    const i = order.indexOf(cur.status);
+    updateTask(id, { status: order[(i + 1) % order.length] });
+  }
+
+  // ---------- Rendering ----------
+  function setSync(text) { $("#sync").textContent = text; }
+  function scheduleRender() {
+    if (renderQueued) return;
+    renderQueued = true;
+    requestAnimationFrame(() => { renderQueued = false; render(); });
+  }
+  function typing() {
+    const a = document.activeElement;
+    return a && (a.tagName === "TEXTAREA" || (a.tagName === "INPUT" && a.type !== "checkbox")) && a.closest("#main");
+  }
+
+  function render() {
+    if (typing()) { renderDeferred = true; return; }
+    renderDeferred = false;
+    for (const b of document.querySelectorAll(".tab")) b.setAttribute("aria-selected", String(b.dataset.view === view));
+    const main = $("#main");
+    const y = window.scrollY;
+    main.replaceChildren(views[view]());
+    window.scrollTo(0, y);
+  }
+  document.addEventListener("focusout", () => { if (renderDeferred) setTimeout(() => { if (!typing()) render(); }, 0); });
+
+  function emptyState() {
+    if (!db) return el("div", { class: "notice" }, "The task database isn't available in this view (for example when signed out). Open the page on claude.ai while signed in to see and tick off tasks.");
+    if (!loaded) return el("div", { class: "notice" }, "Loading your tasks…");
+    return el("div", { class: "notice" }, "No tasks yet. Add your first one from the Tasks tab.");
+  }
+
+  function statusButton(t) {
+    return el("button", {
+      class: `status s-${t.status}`, disabled: !canWrite,
+      title: canWrite ? "Click to change status" : STATUS_LABEL[t.status],
+      "aria-label": `Status: ${STATUS_LABEL[t.status]}. Click to change.`,
+      onclick: (e) => { e.stopPropagation(); cycleStatus(t.id); },
+    }, STATUS_LABEL[t.status]);
+  }
+  function chips(t, opts = {}) {
+    return el("div", { class: "chips" },
+      t.idea ? el("span", { class: "chip idea" }, "★ New idea") : null,
+      el("span", { class: `chip ${t.priority === "P1" ? "p1" : ""}` }, t.priority),
+      opts.hidePhase ? null : el("span", { class: "chip" }, t.phase),
+      opts.hideArea ? null : el("span", { class: "chip" }, t.area),
+      (t.signals || []).length === 8 ? el("span", { class: "chip sig" }, "All signals")
+        : (t.signals || []).map((n) => el("span", { class: "chip sig", title: SIGNALS[n - 1]?.name }, `S${n}`)));
+  }
+
+  function taskRow(t, opts = {}) {
+    const open = expanded.has(t.id);
+    const toggle = () => { open ? expanded.delete(t.id) : expanded.add(t.id); render(); };
+    const row = el("div", { class: `task${t.status === "done" ? " is-done" : ""}` },
+      statusButton(t),
+      el("button", { class: "title-btn title", "aria-expanded": String(open), onclick: toggle }, t.title),
+      chips(t, opts));
+    if (open) {
+      const notesId = `notes-${t.id}`;
+      const notes = el("textarea", { id: notesId, placeholder: "Your notes (saved when you click away)", disabled: !canWrite });
+      notes.value = t.notes || "";
+      notes.addEventListener("change", () => updateTask(t.id, { notes: notes.value }));
+      const statusSel = el("select", { class: "field", "aria-label": "Status", disabled: !canWrite,
+        onchange: (e) => updateTask(t.id, { status: e.target.value }) },
+        STATUSES.map((s) => el("option", { value: s, selected: s === t.status }, STATUS_LABEL[s])));
+      const phaseSel = el("select", { class: "field", "aria-label": "Phase", disabled: !canWrite,
+        onchange: (e) => updateTask(t.id, { phase: e.target.value }) },
+        PHASES.map((p) => el("option", { value: p, selected: p === t.phase }, p)));
+      const prioSel = el("select", { class: "field", "aria-label": "Priority", disabled: !canWrite,
+        onchange: (e) => updateTask(t.id, { priority: e.target.value }) },
+        PRIOS.map((p) => el("option", { value: p, selected: p === t.priority }, p)));
+      const del = el("button", { class: "btn danger", disabled: !canWrite }, "Delete task");
+      del.addEventListener("click", () => {
+        if (!del.classList.contains("armed")) { del.classList.add("armed"); del.textContent = "Click again to delete"; return; }
+        tasks.delete(t.id); expanded.delete(t.id); scheduleRender();
+        queueWrite(t.id, () => col.doc(t.id).delete());
+      });
+      row.append(el("div", { class: "detail" },
+        t.detail ? el("p", {}, t.detail) : null,
+        (t.signals || []).length ? el("p", { class: "small muted" },
+          "Discovery signals: " + t.signals.map((n) => `${n} ${SIGNALS[n - 1]?.short}`).join(" · ")) : null,
+        notes,
+        el("div", { class: "row-actions" }, statusSel, phaseSel, prioSel, del)));
+    }
+    return row;
+  }
+
+  // Overview -------------------------------------------------------------
+  function overview() {
+    const list = all();
+    if (!list.length) return el("section", { class: "view" }, emptyState());
+    const s = stats(list);
+    const ideas = list.filter((t) => t.idea);
+    const p1open = list.filter((t) => t.priority === "P1" && t.status !== "done");
+    const next = list.filter((t) => t.status !== "done").sort(byRank).slice(0, 7);
+
+    const statCards = el("div", { class: "stats" },
+      el("div", { class: "panel stat" }, el("div", { class: "eyebrow" }, "Overall"),
+        el("div", { class: "big num" }, `${s.pct}%`), el("div", { class: "small muted" }, `${s.done} of ${s.total} tasks done`), bar(s)),
+      el("div", { class: "panel stat" }, el("div", { class: "eyebrow" }, "In progress"),
+        el("div", { class: "big num" }, String(s.doing)), el("div", { class: "small muted" }, s.blocked ? `${s.blocked} blocked` : "nothing blocked")),
+      el("div", { class: "panel stat" }, el("div", { class: "eyebrow" }, "Open P1 tasks"),
+        el("div", { class: "big num" }, String(p1open.length)), el("div", { class: "small muted" }, "must-do items still open")),
+      el("div", { class: "panel stat" }, el("div", { class: "eyebrow" }, "★ New ideas"),
+        el("div", { class: "big num" }, String(ideas.length)), el("div", { class: "small muted" }, `${ideas.filter((t) => t.status === "done").length} built so far`)));
+
+    const phasePanel = el("div", { class: "panel" }, el("h2", {}, "By phase"),
+      PHASES.map((p) => { const ps = stats(list.filter((t) => t.phase === p));
+        return el("div", { class: "phase-row" }, el("strong", {}, p), bar(ps), el("span", { class: "num small muted" }, `${ps.done}/${ps.total}`)); }),
+      el("p", { class: "small muted" }, "Now = polish the core loop. Before launch = minimum content and systems. Launch = measure the first minute. After launch = updates every 1–2 weeks."));
+
+    const nextPanel = el("div", { class: "panel" }, el("h2", {}, "Up next"),
+      el("div", { class: "list" }, next.map((t) => taskRow(t, { hidePhase: false }))));
+
+    const areaGrid = el("div", { class: "areas" }, areaNames(list).map((a) => {
+      const as = stats(list.filter((t) => t.area === a));
+      return el("button", { class: "area-card", onclick: () => { Object.assign(filters, { area: a, phase: "", signal: "", q: "", ideas: false }); savePrefs(); go("tasks"); } },
+        el("div", { class: "row" }, el("span", {}, a), el("span", { class: "num muted" }, `${as.done}/${as.total}`)), bar(as));
+    }));
+
+    const sigPanel = el("div", { class: "panel" }, el("h2", {}, "Signal coverage"),
+      SIGNALS.map((g) => { const gs = stats(list.filter((t) => (t.signals || []).includes(g.n)));
+        return el("div", { class: "phase-row" }, el("span", {}, `${g.n} · ${g.short}`), bar(gs), el("span", { class: "num small muted" }, `${gs.done}/${gs.total}`)); }));
+
+    return el("section", { class: "view" }, statCards,
+      el("div", { class: "two" }, nextPanel, el("div", { class: "view" }, phasePanel, sigPanel)),
+      el("div", { class: "panel" }, el("h2", {}, "Systems"), el("p", { class: "small muted" }, "Pick a system to see its tasks."), areaGrid));
+  }
+  function areaNames(list) {
+    const seen = new Set(list.map((t) => t.area));
+    return [...AREAS.filter((a) => seen.has(a)), ...[...seen].filter((a) => !AREAS.includes(a)).sort()];
+  }
+
+  // Tasks ----------------------------------------------------------------
+  function tasksView() {
+    const list = all();
+    const areaOpts = areaNames(list);
+    const set = (k) => (e) => { filters[k] = e.target.type === "checkbox" ? e.target.checked : e.target.value; savePrefs(); render(); };
+
+    const search = el("input", { id: "f-q", type: "search", class: "field", placeholder: "Search tasks", "aria-label": "Search tasks" });
+    search.value = filters.q;
+    let t0; search.addEventListener("input", () => { clearTimeout(t0); t0 = setTimeout(() => { filters.q = search.value; savePrefs(); renderList(); }, 150); });
+
+    const sel = (id, key, label, opts) => el("select", { id, class: "field", "aria-label": label, onchange: set(key) },
+      opts.map(([v, txt]) => el("option", { value: v, selected: filters[key] === v }, txt)));
+
+    const filterBar = el("div", { class: "panel" }, el("div", { class: "filters" },
+      search,
+      sel("f-area", "area", "System", [["", "All systems"], ...areaOpts.map((a) => [a, a])]),
+      sel("f-phase", "phase", "Phase", [["", "All phases"], ...PHASES.map((p) => [p, p])]),
+      sel("f-signal", "signal", "Signal", [["", "All signals"], ...SIGNALS.map((g) => [String(g.n), `${g.n} · ${g.short}`])]),
+      sel("f-status", "status", "Status", [["open", "Not done"], ["", "Any status"], ...STATUSES.map((s) => [s, STATUS_LABEL[s]])]),
+      sel("f-group", "group", "Group by", [["area", "Group by system"], ["phase", "Group by phase"]]),
+      el("label", { class: "check" }, el("input", { id: "f-ideas", type: "checkbox", checked: filters.ideas, onchange: set("ideas") }), "★ New ideas only"),
+      el("button", { class: "btn", onclick: () => { Object.assign(filters, { q: "", area: "", phase: "", signal: "", status: "open", ideas: false }); savePrefs(); render(); } }, "Clear")));
+
+    const listHost = el("div", { class: "view", id: "list-host" });
+    const wrap = el("section", { class: "view" }, filterBar, addPanel(areaOpts), listHost);
+    renderList(listHost);
+    return wrap;
+  }
+  function filtered() {
+    const q = filters.q.trim().toLowerCase();
+    return all().filter((t) =>
+      (!filters.area || t.area === filters.area) &&
+      (!filters.phase || t.phase === filters.phase) &&
+      (!filters.signal || (t.signals || []).includes(Number(filters.signal))) &&
+      (filters.status === "" ? true : filters.status === "open" ? t.status !== "done" : t.status === filters.status) &&
+      (!filters.ideas || t.idea) &&
+      (!q || `${t.title} ${t.detail} ${t.notes} ${t.area}`.toLowerCase().includes(q))).sort(byRank);
+  }
+  function renderList(host = $("#list-host")) {
+    if (!host) return;
+    if (!tasks.size) { host.replaceChildren(emptyState()); return; }
+    const list = filtered();
+    const key = filters.group === "phase" ? "phase" : "area";
+    const order = key === "phase" ? PHASES : areaNames(all());
+    const groups = order.map((g) => [g, list.filter((t) => t[key] === g)]).filter(([, l]) => l.length);
+    host.replaceChildren(
+      el("div", { class: "count" }, `${list.length} task${list.length === 1 ? "" : "s"} shown`),
+      ...(groups.length ? groups.map(([g, l]) => el("div", { class: "list" },
+        el("div", { class: "group-title" }, el("h3", {}, g), el("span", { class: "count num" }, `${stats(l).done}/${l.length}`)),
+        l.map((t) => taskRow(t, key === "area" ? { hideArea: true } : { hidePhase: true }))))
+        : [el("div", { class: "notice" }, "No tasks match these filters.")]));
+  }
+  function addPanel(areaOpts) {
+    const details = el("details", { class: "panel", id: "add-panel", open: addOpen }, el("summary", { class: "eyebrow" }, "Add a task"));
+    details.addEventListener("toggle", () => { addOpen = details.open; });
+    if (!canWrite || !col) { details.append(el("p", { class: "small muted" }, "You can view tasks but not add them with your access.")); return details; }
+    const title = el("input", { id: "add-title", class: "field", required: true, placeholder: "e.g. Candy monster set: 6 species" });
+    const area = el("select", { id: "add-area", class: "field" }, [...new Set([...AREAS, ...areaOpts])].map((a) => el("option", { value: a, selected: a === (filters.area || "Core loop") }, a)));
+    const phase = el("select", { id: "add-phase", class: "field" }, PHASES.map((p) => el("option", { value: p }, p)));
+    const prio = el("select", { id: "add-prio", class: "field" }, PRIOS.map((p) => el("option", { value: p, selected: p === "P2" }, p)));
+    const detail = el("textarea", { id: "add-detail", class: "field", placeholder: "Details (optional)" });
+    const sigs = SIGNALS.map((g) => el("input", { type: "checkbox", id: `add-s${g.n}`, value: String(g.n) }));
+    const idea = el("input", { type: "checkbox", id: "add-idea" });
+    const msg = el("span", { class: "small muted", role: "status" });
+    const form = el("form", { class: "add-grid" },
+      el("label", { class: "wide" }, "Task", title),
+      el("label", {}, "System", area), el("label", {}, "Phase", phase), el("label", {}, "Priority", prio),
+      el("label", { class: "wide" }, "Details", detail),
+      el("div", { class: "wide" }, el("div", { class: "eyebrow" }, "Discovery signals"),
+        el("div", { class: "sig-picks" }, SIGNALS.map((g, i) => el("label", { for: `add-s${g.n}` }, sigs[i], `${g.n} ${g.short}`)),
+          el("label", { for: "add-idea" }, idea, "★ New idea"))),
+      el("div", { class: "wide row-actions" }, el("button", { class: "btn primary", type: "submit" }, "Add task"), msg));
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = title.value.trim(); if (!name) return;
+      const doc = { title: name, area: area.value, phase: phase.value, priority: prio.value, status: "todo",
+        detail: detail.value.trim(), signals: sigs.filter((c) => c.checked).map((c) => Number(c.value)),
+        idea: idea.checked, notes: "", order: Date.now() };
+      const ref = col.doc();
+      tasks.set(ref.id, doc); title.value = ""; detail.value = ""; sigs.forEach((c) => (c.checked = false)); idea.checked = false;
+      msg.textContent = `Added “${name}”.`;
+      scheduleRender();
+      queueWrite(ref.id, () => ref.set(doc));
+    });
+    details.append(form);
+    return details;
+  }
+
+  // Content matrix ---------------------------------------------------------
+  function contentView() {
+    const list = all().filter((t) => t.zone && t.slot);
+    if (!list.length) return el("section", { class: "view" }, emptyState());
+    const find = (z, s) => list.find((t) => t.zone === z && t.slot === s);
+    const zs = stats(list);
+    const rows = ZONES.map((z) => {
+      const zt = list.filter((t) => t.zone === z); const st = stats(zt);
+      return el("tr", {},
+        el("td", {}, el("div", { class: "zone-name" }, z), el("div", { class: "small muted num" }, `${st.done}/${st.total} ready · ${zt[0]?.phase || ""}`)),
+        SLOTS.map((s) => { const t = find(z, s);
+          if (!t) return el("td", { class: "muted small" }, "—");
+          return el("td", {}, el("button", { class: "cell", disabled: !canWrite, title: t.detail || t.title,
+            onclick: () => cycleStatus(t.id) },
+            el("span", { class: `pill s-${t.status}` }, STATUS_LABEL[t.status]),
+            el("span", { class: "name" }, t.title.replace(`${z}: `, "")))); }));
+    });
+    return el("section", { class: "view" },
+      el("div", { class: "panel" }, el("h2", {}, "Zones, trees and monsters"),
+        el("p", { class: "small muted" }, `${zs.done} of ${zs.total} content slots ready. Each zone needs a shakeable Common, Uncommon and Rare tree plus its own monster set. Click a cell to change its status. Launch with Forest, Candy and Sandy; ship Icy, Volcanic and Cosmic as updates.`),
+        bar(zs)),
+      el("div", { class: "panel table-wrap" }, el("table", {},
+        el("thead", {}, el("tr", {}, el("th", {}, "Zone"), SLOTS.map((s) => el("th", {}, s === "Monsters" ? "Monster set" : `${s} tree`)))),
+        el("tbody", {}, rows))));
+  }
+
+  // Signals ----------------------------------------------------------------
+  function signalsView() {
+    const list = all();
+    return el("section", { class: "view" },
+      el("div", { class: "notice" }, "From Roblox's official discovery docs, as explained in the video. Signals 1–4 are the most important group; 5–8 are important. Each signal counts only players who joined from Recommended For You on Home, and every number is an average per player."),
+      el("div", { class: "sig-grid" }, SIGNALS.map((g) => {
+        const gl = list.filter((t) => (t.signals || []).includes(g.n)).sort(byRank);
+        const gs = stats(gl);
+        return el("div", { class: "panel sig-card" },
+          el("div", { class: "sig-head" }, el("div", { class: "sig-num" }, String(g.n)),
+            el("div", {}, el("h3", {}, g.name), el("span", { class: `badge ${g.top ? "top" : "imp"}` }, g.top ? "Most important" : "Important"))),
+          el("p", { class: "small", style: "margin:0" }, g.what),
+          el("p", { class: "small muted", style: "margin:0" }, el("strong", {}, "In this game: "), g.game),
+          bar(gs),
+          el("ul", { class: "mini" }, gl.slice(0, 8).map((t) => el("li", {}, el("span", { class: `dot d-${t.status}`, "aria-label": STATUS_LABEL[t.status] }), t.title))),
+          gl.length > 8 ? el("button", { class: "btn", onclick: () => { Object.assign(filters, { signal: String(g.n), area: "", phase: "", q: "", status: "", ideas: false }); savePrefs(); go("tasks"); } }, `See all ${gl.length} tasks`) : null);
+      })));
+  }
+
+  // Numbers & rules -----------------------------------------------------------
+  function numbersView() {
+    return el("section", { class: "view" },
+      el("div", { class: "notice" }, "Approved numbers as of place v75 (Nov 13). Change them in the game first, then here."),
+      el("div", { class: "sig-grid" }, NUMBERS.map((g) => el("div", { class: "panel table-wrap" }, el("h3", {}, g.title),
+        el("table", { style: "min-width:0" }, el("tbody", {}, g.rows.map(([k, v]) => el("tr", {}, el("td", {}, k), el("td", { class: "num" }, v)))))))),
+      el("div", { class: "two" },
+        el("div", { class: "panel" }, el("h2", {}, "How we work"), el("ul", { class: "rules" }, RULES_WORK.map((r) => el("li", {}, r)))),
+        el("div", { class: "panel" }, el("h2", {}, "Algorithm rules"), el("ul", { class: "rules" }, RULES_ALGO.map((r) => el("li", {}, r))))));
+  }
+
+  const views = { overview, tasks: tasksView, content: contentView, signals: signalsView, numbers: numbersView };
+
+  // ---------- Routing ----------
+  function go(v) { if (location.hash !== `#${v}`) location.hash = v; else { view = v; render(); } }
+  function readHash() { const h = location.hash.slice(1); view = views[h] ? h : "overview"; render(); window.scrollTo(0, 0); }
+  window.addEventListener("hashchange", readHash);
+  for (const b of document.querySelectorAll(".tab")) b.addEventListener("click", () => go(b.dataset.view));
+
+  // ---------- Boot ----------
+  readHash();
+  const timer = setTimeout(() => { if (!loaded) setSync("Saved tasks can't be reached yet."); }, 10000);
+  (async () => {
+    try {
+      const claude = window.claude;
+      db = claude ? await claude.use("db") : null;
+      const user = claude ? await claude.use("user") : null;
+      if (user && typeof user.can === "function") { const w = await user.can("data.write"); if (w === false) canWrite = false; }
+    } catch { db = null; }
+    if (!db) { clearTimeout(timer); setSync("Offline view"); render(); return; }
+    col = db.collection("tasks");
+    col.onSnapshot((snap) => {
+      tasks.clear();
+      for (const d of snap.docs) tasks.set(d.id, d.data());
+      if (!snap.metadata.fromCache) { loaded = true; clearTimeout(timer); }
+      setSync(canWrite ? (snap.metadata.hasPendingWrites ? "Saving…" : "All changes saved") : "View only");
+      scheduleRender();
+    }, (err) => { clearTimeout(timer); loaded = true; setSync(err.code === "revoked" ? "Access changed" : "Saved tasks can't be reached."); scheduleRender(); });
+  })();
+})();
+</script>
