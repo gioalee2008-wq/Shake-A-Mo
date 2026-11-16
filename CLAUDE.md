@@ -3,6 +3,7 @@
 Roblox game in development. Owner works on a **Mac** (since 2026-11-16); the old Windows PC is retired.
 
 ## Read first
+- `docs/HANDOFF.md`: where the work stands, techniques that worked, asset IDs, open decisions. **Start here.**
 - `docs/KNOWLEDGE.md`: the game's rules, art styles, discovery signals and open decisions.
 - The owner's own rules are in `docs/APPROVED_DECISIONS.md` in the project folder (backup on Google Drive,
   "Project files/docs"). They override everything else.
