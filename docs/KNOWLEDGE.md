@@ -62,7 +62,41 @@ average per player.
 - **Meme culture** made the game something kids talk about at school.
 - **Live admin events** (the developer showing up and changing the game) rewarded players for being online.
 
-## 4. What this means for SHAKE A Monster Tree!
+## 4. Project facts from the owner's docs [Project] (Google Drive, Nov 13)
+Source: `APPROVED_DECISIONS.md`, `CURRENT_STATUS.md`, `ZONE_ART_REFERENCE.md` and the system READMEs in Drive's "Project files".
+These are the owner's rules. They override anything above.
+
+- **Locked design:** steal a monster and escape a *continuously growing* branch. **Max 5 players, 5 bases.** Safe
+  Zone ends the chase; a monster is only secured when deposited in your *own* base. Carry 1 at a time. Monsters
+  roam free in a fenced base (no stands, no cages). **No forced PvP theft; solo play must be complete.** One straight
+  6-biome corridor, all open from start (no level gates). Hub layout preserved.
+- **Speed:** treadmill training adds Speed automatically (no clicking); **boots** (9, from the Boot Shop) multiply it.
+  WalkSpeed follows Speed on a capped curve (**max 60**). Speed Power (display) ≠ WalkSpeed. No speed XP from running
+  or escaping.
+- **Income:** passive income for owned monsters, online-only for now. **Offline income is not approved yet.**
+- **Stations in the hub:** Boot Shop (working), Sell Station (visual), Fusion Laboratory (prompt only), Daily Spin
+  (visual), Leaderboards (TopSpeed / RichestCollectors / MostEscapes, visual).
+- **Saving:** SaveService saves coins, boots, speed and owned monsters (session lock, UpdateAsync, 60 s autosave).
+- **Art styles:**
+  - Monsters: **Style C, "Premium Chunky Fantasy"**: chunky, stylized, monstrous but not scary, 60% fantasy
+    monster, 30% premium Roblox, 10% magic.
+  - Zones: **Blocky Trench World**: trench path with a white centre line, checker cliff walls, a blocky drip lip,
+    a plateau with huge landmarks, cube-only props, 2–3 hues plus one glowing accent per zone, subtle same-colour
+    studs.
+  - Trees: **Block Guardian**.
+  - HUD: **Toy Stud / sticker icons**, now plain (no backgrounds).
+- **Known style risk (owner's own doc):** smooth monsters in a blocky world may stand out. That could be fine, since
+  they're the prizes, but it needs a deliberate rule.
+- **Approved Forest monster names:** Leafling · Bunfruit · Mushroom Buddy · Acorn Armadillo · Apple Fox · Flower Deer
+  · Golden Goat · Ancient Tree Turtle. ⚠ The Nov 13 income table uses *different* names (Frogstump, Brambleboar,
+  Glimmerdeer, Rockmoss, Wispfox) for the 8 imported species. **This mismatch needs the owner's decision.**
+- **Not approved yet:** prices, storage beyond 20, tree challenge targets, 12 s cooldown, sell formula, fusion fee,
+  max Speed level, other biomes' species and incomes, offline income, social features.
+- **Open issue:** `Players.MaxPlayers` was still 60 (the 5-player cap may not be set).
+- **Safety rules:** no Studio Play without permission; no map redesign, asset deletion or economy changes without OK;
+  back up first; PASS / FAIL / NOT TESTED; one focused task at a time.
+
+## 5. What this means for SHAKE A Monster Tree!
 1. **Retention over 28 days is now the big lever.** Offline earnings, the daily streak, the Index, and a new
    zone or event every 1–2 weeks move it.
 2. **The first minute still decides everything.** First shake always drops, easier first chases, no menus.

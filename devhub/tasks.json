@@ -789,7 +789,7 @@
   "phase": "Before launch",
   "priority": "P1",
   "status": "todo",
-  "detail": "Monsters keep earning while away, capped at a few hours. Show a big Collect screen on rejoin.",
+  "detail": "Monsters keep earning while away, capped at a few hours, with a big Collect screen on rejoin. NOTE: offline income is not approved yet in APPROVED_DECISIONS (income is online-only for now). Needs your decision first.",
   "signals": [
    3
   ],
@@ -816,8 +816,8 @@
   "area": "Economy & progression",
   "phase": "Before launch",
   "priority": "P2",
-  "status": "todo",
-  "detail": "Decide how speed is earned/upgraded and how it interacts with chase balance.",
+  "status": "done",
+  "detail": "Already built (Speed system v3): treadmills add Speed automatically, 9 boots from the Boot Shop multiply it, WalkSpeed follows Speed up to 60.",
   "signals": [
    4
   ],
@@ -1710,6 +1710,174 @@
   ],
   "idea": true,
   "order": 114,
+  "notes": ""
+ },
+ "core-re-check-chase-balance-at-high-speed": {
+  "title": "Re-check chase balance at high Speed",
+  "area": "Core loop",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "WalkSpeed grows with Speed training up to 60, but the branch tip is fixed at 21 studs/s. Above ~25 studs/s every escape is guaranteed. Consider scaling the tip with tree rarity or the thief's speed.",
+  "signals": [
+   2,
+   4
+  ],
+  "idea": false,
+  "order": 115,
+  "notes": ""
+ },
+ "test-set-the-5-player-server-cap": {
+  "title": "Set the 5-player server cap",
+  "area": "Testing & QA",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "APPROVED_DECISIONS says max 5 players / 5 bases, but Players.MaxPlayers was still 60. Set it in Game Settings and verify.",
+  "signals": [
+   5
+  ],
+  "idea": false,
+  "order": 116,
+  "notes": ""
+ },
+ "mons-resolve-forest-monster-names": {
+  "title": "Resolve Forest monster names",
+  "area": "Monsters",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "Approved names: Leafling, Bunfruit, Mushroom Buddy, Acorn Armadillo, Apple Fox, Flower Deer, Golden Goat, Ancient Tree Turtle. The imported species and income table use Frogstump, Brambleboar, Glimmerdeer, Rockmoss, Wispfox. Owner decides which list is final.",
+  "signals": [],
+  "idea": false,
+  "order": 117,
+  "notes": ""
+ },
+ "test-boot-shop-play-test-buy-equip-and-saving": {
+  "title": "Boot Shop: Play-test buy, equip and saving",
+  "area": "Testing & QA",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "Built and styled, but buying, equipping, boots on a running avatar and other players seeing them were never Play-tested.",
+  "signals": [
+   7
+  ],
+  "idea": false,
+  "order": 118,
+  "notes": ""
+ },
+ "tree-decide-the-art-rule-for-smooth-monsters-in-a-blocky-world": {
+  "title": "Decide the art rule for smooth monsters in a blocky world",
+  "area": "Trees & art",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "Monsters are Style C (smooth, chunky); trees, zones and props are blocky. Keep smooth monsters as the prize on purpose, or restyle them. Owner decision.",
+  "signals": [
+   1
+  ],
+  "idea": false,
+  "order": 119,
+  "notes": ""
+ },
+ "tree-write-the-art-bible": {
+  "title": "Write the art bible",
+  "area": "Trees & art",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "One page: palette per zone, materials, monster rules (Style C), tree rules (Block Guardian), UI fonts and icon style, VFX, and approved reference screenshots.",
+  "signals": [
+   1,
+   6
+  ],
+  "idea": false,
+  "order": 120,
+  "notes": ""
+ },
+ "rete-daily-spin-make-it-work": {
+  "title": "Daily Spin: make it work",
+  "area": "Retention",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "The wheel exists in the hub but is visual only. A free daily spin is a ready-made reason to come back tomorrow.",
+  "signals": [
+   3
+  ],
+  "idea": false,
+  "order": 121,
+  "notes": ""
+ },
+ "rete-leaderboards-make-them-work": {
+  "title": "Leaderboards: make them work",
+  "area": "Retention",
+  "phase": "Before launch",
+  "priority": "P3",
+  "status": "todo",
+  "detail": "TopSpeed, RichestCollectors and MostEscapes boards exist but show nothing yet.",
+  "signals": [
+   3,
+   5
+  ],
+  "idea": false,
+  "order": 122,
+  "notes": ""
+ },
+ "econ-sell-station-decide-the-formula-and-build-it": {
+  "title": "Sell Station: decide the formula and build it",
+  "area": "Economy & progression",
+  "phase": "Before launch",
+  "priority": "P2",
+  "status": "todo",
+  "detail": "Visual only. The sell formula still needs owner approval.",
+  "signals": [
+   4
+  ],
+  "idea": false,
+  "order": 123,
+  "notes": ""
+ },
+ "econ-fusion-laboratory-design-and-build": {
+  "title": "Fusion Laboratory: design and build",
+  "area": "Economy & progression",
+  "phase": "After launch",
+  "priority": "P3",
+  "status": "todo",
+  "detail": "The prompt exists with no handler. The fusion fee still needs approval.",
+  "signals": [
+   3,
+   4
+  ],
+  "idea": false,
+  "order": 124,
+  "notes": ""
+ },
+ "zone-per-zone-lighting-and-fog": {
+  "title": "Per-zone lighting and fog",
+  "area": "Zones & content",
+  "phase": "Before launch",
+  "priority": "P3",
+  "status": "todo",
+  "detail": "From the zone art reference: each zone gets its own lighting/fog mood when you walk in. Needs owner OK before building.",
+  "signals": [
+   2
+  ],
+  "idea": false,
+  "order": 125,
+  "notes": ""
+ },
+ "tool-set-up-the-mac": {
+  "title": "Set up the Mac",
+  "area": "Tools & workflow",
+  "phase": "Now",
+  "priority": "P1",
+  "status": "todo",
+  "detail": "Follow docs/MAC_SETUP.md: Claude desktop app, Roblox Studio + Studio MCP, Blender 4.5.2, restore the project from Drive, plugins (ponytail, roblox-dev, ui-figma-roblox skill), Figma + ForgeGUI.",
+  "signals": [],
+  "idea": false,
+  "order": 126,
   "notes": ""
  }
 }

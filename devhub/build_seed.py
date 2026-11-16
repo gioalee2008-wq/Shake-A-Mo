@@ -74,9 +74,9 @@ A = "Economy & progression"
 t(A, "now", "P1", "done", "Income per second per monster (approved set A)", "Leafling 5 → Wispfox 220 coins/s.", [4])
 t(A, "now", "P1", "done", "Base storage 10 → 20 slots with upgrades", "12 (10K), 14 (50K), 16 (200K), 18 (750K), 20 (2.5M). Full base auto-swaps the weakest. Save/rejoin PASS.", [4])
 t(A, "now", "P1", "todo", "Show income per second on the HUD again", "Removed in the HUD redesign. Watching income grow keeps players playing.", [4])
-t(A, "pre", "P1", "todo", "Offline earnings with a Collect moment on return", "Monsters keep earning while away, capped at a few hours. Show a big Collect screen on rejoin.", [3])
+t(A, "pre", "P1", "todo", "Offline earnings with a Collect moment on return", "Monsters keep earning while away, capped at a few hours, with a big Collect screen on rejoin. NOTE: offline income is not approved yet in APPROVED_DECISIONS (income is online-only for now). Needs your decision first.", [3])
 t(A, "pre", "P2", "todo", "Plan the first 60 minutes of goals", "e.g. 0–5 min first deposit, ~15 min storage upgrade, ~30 min next zone, ~60 min first Rare. Only 60 min/day count.", [4])
-t(A, "pre", "P2", "todo", "Speed upgrade path", "Decide how speed is earned/upgraded and how it interacts with chase balance.", [4])
+t(A, "pre", "P2", "done", "Speed upgrade path", "Already built (Speed system v3): treadmills add Speed automatically, 9 boots from the Boot Shop multiply it, WalkSpeed follows Speed up to 60.", [4])
 t(A, "post", "P3", "todo", "Rebirth system", "Reset progress for a permanent multiplier: long-term goal for players past the first week.", [3, 4])
 
 # ---- UI / HUD -------------------------------------------------------------
@@ -181,6 +181,20 @@ t("Analytics", "post", "P2", "todo", "Read retention by acquisition source", "Cr
 t("Monsters", "pre", "P2", "todo", "Show off monsters to other players", "Rare monsters visible in bases and while carried, so collections become status (a big part of why similar games spread).", [5, 4])
 t("Economy & progression", "pre", "P3", "todo", "Risk choice: Rare trees drop better but chase harder", "Give players a real decision about when to risk a harder tree.", [4])
 t("Retention", "post", "P3", "todo", "Developer-hosted live events", "You join a server and trigger events (Monster Rain, golden drops). Rewards being online.", [3, 4], idea=True)
+
+# ---- Added from the owner's Google Drive docs (2026-11-16) ----------------------------
+t("Core loop", "now", "P1", "todo", "Re-check chase balance at high Speed", "WalkSpeed grows with Speed training up to 60, but the branch tip is fixed at 21 studs/s. Above ~25 studs/s every escape is guaranteed. Consider scaling the tip with tree rarity or the thief's speed.", [2, 4])
+t("Testing & QA", "now", "P1", "todo", "Set the 5-player server cap", "APPROVED_DECISIONS says max 5 players / 5 bases, but Players.MaxPlayers was still 60. Set it in Game Settings and verify.", [5])
+t("Monsters", "now", "P1", "todo", "Resolve Forest monster names", "Approved names: Leafling, Bunfruit, Mushroom Buddy, Acorn Armadillo, Apple Fox, Flower Deer, Golden Goat, Ancient Tree Turtle. The imported species and income table use Frogstump, Brambleboar, Glimmerdeer, Rockmoss, Wispfox. Owner decides which list is final.", [])
+t("Testing & QA", "now", "P1", "todo", "Boot Shop: Play-test buy, equip and saving", "Built and styled, but buying, equipping, boots on a running avatar and other players seeing them were never Play-tested.", [7])
+t("Trees & art", "now", "P1", "todo", "Decide the art rule for smooth monsters in a blocky world", "Monsters are Style C (smooth, chunky); trees, zones and props are blocky. Keep smooth monsters as the prize on purpose, or restyle them. Owner decision.", [1])
+t("Trees & art", "pre", "P2", "todo", "Write the art bible", "One page: palette per zone, materials, monster rules (Style C), tree rules (Block Guardian), UI fonts and icon style, VFX, and approved reference screenshots.", [1, 6])
+t("Retention", "pre", "P2", "todo", "Daily Spin: make it work", "The wheel exists in the hub but is visual only. A free daily spin is a ready-made reason to come back tomorrow.", [3])
+t("Retention", "pre", "P3", "todo", "Leaderboards: make them work", "TopSpeed, RichestCollectors and MostEscapes boards exist but show nothing yet.", [3, 5])
+t("Economy & progression", "pre", "P2", "todo", "Sell Station: decide the formula and build it", "Visual only. The sell formula still needs owner approval.", [4])
+t("Economy & progression", "post", "P3", "todo", "Fusion Laboratory: design and build", "The prompt exists with no handler. The fusion fee still needs approval.", [3, 4])
+t("Zones & content", "pre", "P3", "todo", "Per-zone lighting and fog", "From the zone art reference: each zone gets its own lighting/fog mood when you walk in. Needs owner OK before building.", [2])
+t("Tools & workflow", "now", "P1", "todo", "Set up the Mac", "Follow docs/MAC_SETUP.md: Claude desktop app, Roblox Studio + Studio MCP, Blender 4.5.2, restore the project from Drive, plugins (ponytail, roblox-dev, ui-figma-roblox skill), Figma + ForgeGUI.", [])
 
 out = sys.argv[1]
 os.makedirs(os.path.join(out, "docs"), exist_ok=True)

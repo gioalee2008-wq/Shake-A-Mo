@@ -6,6 +6,8 @@ A Roblox game, built to earn a spot in Home's **Recommended For You** row.
 
 - [`docs/KNOWLEDGE.md`](docs/KNOWLEDGE.md): everything learned so far (2026 discovery changes, thumbnails,
   lessons from similar games), with sources and confidence. **Claude sessions should read this first.**
+- [`docs/MAC_SETUP.md`](docs/MAC_SETUP.md): setting up the Mac (apps, project restore from Google Drive, plugins,
+  connections) with a prompt to paste into Claude Code.
 - [`docs/VIDEO_NOTES.md`](docs/VIDEO_NOTES.md): what Roblox's 8 official discovery signals are
   and how they're measured.
 - [`docs/ROBLOX_ALGORITHM_PLAYBOOK.md`](docs/ROBLOX_ALGORITHM_PLAYBOOK.md): every suggestion for

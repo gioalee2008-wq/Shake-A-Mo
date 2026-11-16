@@ -269,7 +269,7 @@ th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: 
     ]},
     { title: "Chase", rows: [
       ["Branch tip speed", "21 studs/s, turns 120°/s"], ["Homing range", "14 studs"], ["Catch distance", "4 studs"],
-      ["Player WalkSpeed", "16 (unchanged)"], ["Player scale", "×1.5 on spawn"],
+      ["Player WalkSpeed", "16 at start, grows with Speed training (treadmill × boots), max 60"], ["Player scale", "×1.5 on spawn"],
     ]},
     { title: "Forest incomes (coins/s)", rows: [
       ["Leafling", "5"], ["Bunfruit", "8"], ["MushroomBuddy", "12"], ["Frogstump", "30"], ["Brambleboar", "40"],
@@ -290,6 +290,7 @@ th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: 
     "Back up before changing approved assets (ServerStorage + a local copy).",
     "Report every change as PASS / FAIL / NOT TESTED.",
     "No unrelated features. Approved names only.",
+    "Max 5 players per server. Solo play must be complete; no forced PvP theft.",
     "New guardian trees reuse the Block Guardian builder with their zone's colors.",
   ];
   const RULES_ALGO = [
@@ -321,7 +322,10 @@ th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: 
     "(homes in within 14 studs, catches at 4 studs, WalkSpeed 16). Depositing at your base adds coins per second (Leafling 5 up to Wispfox 220). " +
     "Base storage starts at 10 slots, upgrades to 20. Six zones: Forest Grove, Candy Canopy, Sandy Orchard, Icy Thicket, Volcanic Woods, Cosmic Orchard. " +
     "Locked tree style: Block Guardian (cubes with the ground's stud material, sleeping face that turns angry, claw hidden in the leaves). " +
-    "Players are scaled x1.5. Only the 8 Forest monsters exist so far. The game is not released yet.";
+    "Players are scaled x1.5. Only the 8 Forest monsters exist so far. The game is not released yet. " +
+    "Max 5 players per server and 5 bases; solo play must be complete (no forced PvP theft). Speed: treadmills train Speed automatically and 9 boots " +
+    "from the Boot Shop multiply it; WalkSpeed follows Speed up to 60. Hub stations: Boot Shop, Sell Station, Fusion Lab, Daily Spin, Leaderboards. " +
+    "Monster style: Premium Chunky Fantasy (smooth, stylized); zones: Blocky Trench World. The owner's rules are in docs/APPROVED_DECISIONS.md in the project folder.";
   const WORK_RULES = "Never start Studio Play without asking me. Back up before changing approved assets. No unrelated features. " +
     "Report results as PASS / FAIL / NOT TESTED. Keep replies short and simple.";
   const STRONG_AREAS = ["Trees & art", "Zones & content", "VFX & audio", "Core loop", "Data & saving", "Monetization"];
