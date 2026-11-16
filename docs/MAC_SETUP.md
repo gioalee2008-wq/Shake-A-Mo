@@ -34,7 +34,7 @@ project docs on Google Drive. **Confirm the list in step 4. There may be plugins
 | Plugin / skill | What it did |
 |---|---|
 | **ponytail** (plugin) | Answer-length levels, e.g. `/ponytail:ponytail lite`. Lite was the last setting. |
-| **ui-figma-roblox** (personal skill, was in `C:\Users\msxal\.claude\skills\ui-figma-roblox`) | Roblox "stud" UI design in Figma, with bundled asset images. Copy the folder from the archive into `~/.claude/skills/`. |
+| **ui-figma-roblox** (skill) | Roblox "stud" UI design in Figma. **Already in this repo** at `.claude/skills/ui-figma-roblox` (instructions only). To get its 329 MB asset library on the Mac, run `npx ui-figma-roblox --project --target claude --force` in the repo folder, or `npx ui-figma-roblox --target claude` to install it for every project. |
 | **roblox-dev** (plugin) | Roblox coding skills (security, DataStores, UI, performance). |
 
 **Please check:** were there any others, such as Roblox Studio plugins? Add them here.
@@ -48,7 +48,7 @@ Open Claude Code in `~/Documents/Shake a Monster Tree!` and paste this:
 > 1. Check what's installed: Roblox Studio, Blender (must be 4.5.2 LTS), git, Google Drive for desktop.
 > 2. Find my project backup in Google Drive (My Drive → "Project files" and the "Complete PC Archive" zip),
 >    restore it to ~/Documents/Shake a Monster Tree!, and copy the newer "Project files" over the archive.
-> 3. Copy my personal skill "ui-figma-roblox" from the archive's .claude/skills folder into ~/.claude/skills/.
+> 3. Install the ui-figma-roblox skill with: npx ui-figma-roblox --target claude --yes
 > 4. Install the plugins I used before: ponytail and roblox-dev. Tell me if you can't find one.
 > 5. Help me connect the Roblox Studio MCP, Figma and ForgeGUI.
 > 6. Put the project folder under git and push it to a new branch of the repo, without .rbxl backups or the 10 GB zip.

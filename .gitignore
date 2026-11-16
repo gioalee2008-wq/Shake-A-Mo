@@ -8,3 +8,6 @@ roblox.yml
 /ServerPackages
 .DS_Store
 devhub/seed/
+
+# ui-figma-roblox skill: the 329 MB third-party asset library stays local (reinstall with: npx ui-figma-roblox --project --target claude --force)
+.claude/skills/ui-figma-roblox/assets/
